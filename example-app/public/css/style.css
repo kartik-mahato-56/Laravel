@@ -88,7 +88,18 @@ body{
 
 }
 
-
+.profile_image{
+    height: 100px;
+    width: 100px;
+    background-color:antiquewhite;
+    margin: 10px auto;
+    border-radius:50%;
+}
+.img_prev{
+    height: 100px;
+    width:100px;
+    border-radius: 50%;
+}
 @media (min-width: 1200px){
 .container, .container-lg, .container-md, .container-sm, .container-xl {
   max-width: 100vw;

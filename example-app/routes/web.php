@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\QualificationController;
+use App\Http\Controllers\AdminController;
 
 
 use function Ramsey\Uuid\v1;
@@ -43,4 +44,15 @@ Route::get('/delete/{id}', [StudentController::class,'destroy'])->name('delete')
 
 // Route to loads the edit qualification page
 Route::get('/edit_qualification/{qual_id}',[QualificationController::class, 'edit'])->name('edit_qualification');
+
+// show student details;
+Route::get('/show_details/{id}', [StudentController::class, 'show'])->name('show_details');
+
+
+Route::get('/admin',[AdminController::class, 'index'])->name('admin');
+Route::post('/dashboard', [AdminController::class, 'login'])->name('login');
+
+Route::get('/register',[AdminController::class, 'register'])->name('register');
+Route::post('/signed_up', [AdminController::class, 'store'])->name('signed_up');
+
 

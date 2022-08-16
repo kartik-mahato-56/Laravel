@@ -26,9 +26,16 @@
 
                 <div class="update-form">
                     <h4 class="text-center">Update Student Details</h4>
-                    {{-- <div class="text-center">
-                      
-                    </div> --}}
+                    <div class="text-center">
+                      <div class="profile_image">
+
+                        <img src="{{asset('uploads/students/'.$student->profile_image)}}" id="img_prev" style="width: 100px;height: 100px; border-radius:50%;">
+
+                          <input type="file" hidden name="profile_image" class="form-control" id="avatar" onchange="preview()">
+                      </div>
+                      <label for="avatar" role="button" class="btn btn-primary">Profile Pic</label>
+                  </div>
+
                   <div class="mb-3">
                     <label for="" class="form-label">Name</label>
                     <input type="text" name="name" id="" class="form-control" placeholder="" aria-describedby="helpId" value="{{$student->name}}">
@@ -54,12 +61,13 @@
                       @endforeach
                     </select>
                     </div>
+                    
                     <div class="mb-3">
-                      <label for="" class="form-label"></label>
-                      <input type="file" class="form-control" accept="image/*" name="profile_image" id="" placeholder="" aria-describedby="fileHelpId">
-                      <img src="{{asset('uploads/students/'.$student->profile_image)}}" id="img_prev" style="width: 64px;height: 64px;" style="border-radius: 50px">
-
-                      {{-- <div id="fileHelpId" class="form-text">Help text</div> --}}
+                      @foreach (explode(',',$student->images) as $item)
+                        <img src="{{asset('uploads/gallery/'.$item)}}" width="100px" height="100px" class="img-thumbnail">  
+                      @endforeach
+                      <input type="file" class="form-control" name="images[]" multiple id="" placeholder="" aria-describedby="fileHelpId">
+                      
                     </div>
                   <div class="text-center">
                       <button type="submit" class="btn btn-primary">Update Details</button>
@@ -75,7 +83,7 @@
 </html>
 
 
-{{-- <script type="text/javascript"> 
+<script type="text/javascript">
   var img1 = document.getElementById('img_prev');
   function preview(){
    
@@ -89,7 +97,7 @@
   }
 
   addEventListener("load",function(){
-      // img1.style.display='none';
-  }); --}} 
+      img1.style.display='block';
+  });
   
   </script>

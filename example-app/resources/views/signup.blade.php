@@ -55,16 +55,20 @@
                     <h4 class="text-center">Student Registration</h4>
                     <form method="POST" action="{{route('signup')}}" id="form" enctype="multipart/form-data">
                         @csrf
+                        <div class="text-center">
+                            <div class="profile_image">
+
+                                <img src="" id="img_prev" style="width: 100px;height: 100px; border-radius:50%;"/>
+                                <input type="file" hidden name="profile_image" class="form-control" id="avatar" required onchange="preview()">
+                            </div>
+                        <label for="avatar" role="button" class="btn btn-primary">Profile Pic</label>
+                        </div>
+                      
                         <div class="row">
                             <div class="col">
                             <label for="">Name</label>
                               <input type="text" class="form-control" name="name" placeholder="Enter Name">
                             </div>
-                            {{-- <div class="col">
-                                <label for="">Last Name</label>
-                                  <input type="text" class="form-control" name="lastName" placeholder="Last  name">
-
-                            </div> --}}
                         </div>
                         <div class="row">
                             <div class="col">
@@ -111,10 +115,8 @@
                         <div class="row">
                            
                                 <div class="col">
-                                    <label>Upload Profile Pic:</label>
-                                    <input type="file" name="profile_image" class="form-control" id="avatar" required onchange="preview()">
-                                    <!--Adding Image Preview Option -->
-                                    <img src="" id="img_prev" style="width: 64px;height: 64px;"/>
+                                    <label>Upload Images:</label>
+                                    <input type="file" multiple name="images[]" class="form-control" id="avatar" required onchange="preview()">
                                 </div>
                         </div>
                         <div class="text-center">
@@ -161,6 +163,7 @@
                             <img src="{{asset('uploads/students/'.$item->profile_image)}}" height="50px" width="50px" alt="" srcset="">
                         </td>
                         <td>
+                            <a href="{{route('show_details', $item->id)}}" role="button" class="btn btn-primary">Info</a>
                             <a href="{{route('edit_details', $item->id)}}" class="btn btn-success" role="button">Update</a>
                             <a href="{{route('delete',$item->id)}}" class="btn btn-danger" role="button">Delete</a>
                         </td>
