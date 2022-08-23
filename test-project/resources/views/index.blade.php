@@ -19,37 +19,25 @@
         <section class="home-slider">
             <div class="slider-active">
                 <!-- Single Slider -->
-                <div class="single-slider overlay" style="background-image:url('assets/images/banner1.jpg')" data-stellar-background-ratio="0.5">
+                @foreach ($banners as $banner)
+                    
+                <div class="single-slider overlay" style="background-image:url('{{asset('banners/'.$banner->image)}}')" data-stellar-background-ratio="0.5">
                     <div class="container">
                         <div class="row">
                             <div class="col-lg-8 offset-lg-4 col-md-8 offset-md-4 col-12">
                                 <div class="slider-text text-right">
-                                    <h1>Living Space</h1>
-<!--                                    <div class="button">
+                                    <h1>{{$banner->title}}</h1>
+                                    <!--<div class="button">
                                         <a href="courses.html" class="btn primary">Read More</a>
-                                    </div>-->
+                                    </div> -->  
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <!--/ End Single Slider -->
+                @endforeach
                 <!-- Single Slider -->
-                <div class="single-slider overlay" style="background-image:url('assets/images/banner2.jpg')" data-stellar-background-ratio="0.5">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-lg-8 offset-lg-2 col-md-8 offset-md-2 col-12">
-                                <div class="slider-text text-center">
-                                    <h1>luxury Redefined</h1>
-<!--                                    <div class="button">
-                                        <a href="courses.html" class="btn primary">Read More</a>
-                                    </div>-->
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!--/ End Single Slider -->
             </div>
         </section>
         <!--/ End Slider Area -->
@@ -138,15 +126,17 @@
                 <div class="col-12">
                     <div class="event-slider">
                         <!-- Single Event -->
+                        @foreach ($products as $product)
                         <div class="single-event">
                             <div class="event-content products">
-                                <div class="products-img"><img src="{{asset('assets/images/products-1.jpg')}}" alt="" class="img-fluid"></div>
-                                <div class="products-body"><a href="#">Residential Interior</a></div>
+                                <div class="products-img"><img src="{{asset('products/'.$product->image)}}" height="200px" width="200px" alt="" class="img-fluid"></div>
+                                <div class="products-body"><a href="#">{{$product->title}}</a></div>
                             </div>
                         </div>
+                        @endforeach
                         <!--/ End Single Event -->
                         <!-- Single Event -->
-                        <div class="single-event">
+                        {{-- <div class="single-event">
                             <div class="event-content products">
                                 <div class="products-img"><img src="{{asset('assets/images/products-2.jpg')}}" alt="" class="img-fluid"></div>
                                 <div class="products-body"><a href="#">Living Room</a></div>
@@ -196,7 +186,7 @@
                                 <div class="products-img"><img src="{{asset('assets/images/products-9.jpg')}}" alt="" class="img-fluid"></div>
                                 <div class="products-body"><a href="#">Corporate Office Interior</a></div>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>

@@ -14,7 +14,25 @@
   </head>
   <body>
      <div class="container">
+        <div class="show-details">
+          <div class="text-center">
+          <img src="{{asset('uploads/students/'.$student->profile_image)}}" id="img_prev" style="width: 100px;height: 100px; border-radius:50%;">
+        </div><br>
+          <h6>Name: {{$student->name}}</h6>
+          <h6>Email: {{$student->email}}</h6>
+          <h6>Phone: {{$student->phone}}</h6>
+          <h6>Qualification: @foreach (getQualification($student->id) as $item)
+              {{$item->qualification.","}}
+          @endforeach</h6>
+          <h6>Photos: </h6><br>
+          @foreach (explode(',',$student->images) as $item)
+              <img src="{{asset('uploads/gallery/'.$item)}}" width="100px" height="100px" class="img-thumbnail">  
+          @endforeach
+          <br><br>
+          <a href="{{route('index')}}">Go Back</a>
+          </div>
         
+       </div>
      </div>
   </body>
 </html>

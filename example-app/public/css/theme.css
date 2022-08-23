@@ -269,12 +269,14 @@ section {
 @media (min-width: 1200px) {
     .container {
         max-width: 1320px;
+        max-height: 100%;
     }
 }
 
 /*Page Objects*/
 .page-wrapper {
     overflow: hidden;
+    /* height: 100%; */
 }
 
 .page-container {
@@ -319,6 +321,7 @@ section {
 
 .page-content--bgf7 {
     background: #f7f7f7;
+    height: 100vh;
 }
 
 .page-content--bge5 {
@@ -328,6 +331,7 @@ section {
 
 .login-wrap {
     max-width: 540px;
+    height: 100%;
     padding-top: 8vh;
     margin: 0 auto;
 }

@@ -97,20 +97,50 @@ class AdminController extends Controller
     }
    
     public function login(Request $request){
+        $request->validate([
+            'email'=> 'email|required',
+            'password'=>'required',
+        ]);
         $admin = Admin::where('email',"=",$request->email)->first();
         if($admin){
             
-            $password = Hash::make($request->password);
             if(Hash::check($request->password, $admin->password)){
-                return view('Admin.dashboard',['admin'=>$admin]);
+                $request->session()->put('ADMIN_ID',$admin->id);
+                $request->session()->put('ADMIN_LOGIN',true);
+                return redirect('/dashboard');
             }
             else{
-                return back()->with('error', 'Invalid user name or pasword');
+                return back()->with('error', 'Invalid email or pasword');
             }
             
         }
         else{
             return back()->with('error', 'User not registered, please click on sign up to register');
         }
+    }
+
+    public function dashboard(Request $request){
+        return view('Admin.dashboard');
+    }
+    public function forgetPassword(){
+        return view('Admin.forget-pass');
+    }
+    public function chartLoad(){
+        return view('Admin.chart');
+    }
+    public function tableShow(){
+        return view('Admin.table');
+    }
+    public function loadForm(){
+        return view('Admin.form');
+    }
+    public function mapLoad(){
+        return view('Admin.map');
+    }
+
+    public function logout(){
+        session()->forget('ADMIN_ID');
+        session()->forget('ADMIN_LOGIN');
+        return redirect('/admin');
     }
 }

@@ -22,7 +22,7 @@ Route::get('/welcome', function () {
     return view('welcome');
 });
 // Route for load the signup.blade with all tha user details showing on the right table
-Route::get('/',[StudentController::class,'index'])->name('signup');
+Route::get('/',[StudentController::class,'index'])->name('index');
 
 // route for registration
 Route::post('/', [StudentController::class, 'store'])->name('signup');
@@ -55,4 +55,25 @@ Route::post('/dashboard', [AdminController::class, 'login'])->name('login');
 Route::get('/register',[AdminController::class, 'register'])->name('register');
 Route::post('/signed_up', [AdminController::class, 'store'])->name('signed_up');
 
+// dashboard route
+// forget password route
+Route::get('/forget_password',[AdminController::class,'forgetPassword'])->name('forget-pass');
+
+
+Route::group(['middleware'=>'admin_auth'],function(){
+    Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
+    // chart rout
+    Route::get('/chart',[AdminController::class, 'chartLoad'])->name('chart');
+    // route to show the table
+    Route::get('/table',[AdminController::class, 'tableShow'])->name('table');
+    
+    // route to load form
+    Route::get('/forms', [AdminController::class, 'loadForm'])->name('form');
+    
+    // route to load map
+    Route::get('/maps',[AdminController::class, 'mapLoad'])->name('map');
+
+    Route::get('/logout',[AdminController::class, 'logout'])->name('logout');
+});
+    
 

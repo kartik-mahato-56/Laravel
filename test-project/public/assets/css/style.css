@@ -2938,7 +2938,10 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4d2a1f', end
 
 .products{ position: relative; margin-bottom: 22px;}
 .products-img{ position: relative; z-index: 1;}
-.products-img img{ width: 100%;}
+.products-img img{
+	 width: 200px;
+	 height: 200px;
+	}
 .products-body a{ position: absolute; bottom: 20px; left: 20px; right: 0; background: #fff; padding: 10px; opacity: 0.8;
 z-index: 2; width: 88.5%; font-size: 18px; font-weight: 600; height: 42px; vertical-align: middle; color: #051626;}
 .products-body a:hover{ background: #e63215; color: #fff;}

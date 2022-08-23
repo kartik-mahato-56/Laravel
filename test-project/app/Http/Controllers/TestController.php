@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 // use App\Models\Enquiry;
+
+use App\Models\Banner;
+use App\Models\FeaturedProduct;
 use App\Models\Test;
 use Illuminate\Http\Request;
 use Psy\CodeCleaner\FunctionReturnInWriteContextPass;
@@ -20,7 +23,9 @@ class TestController extends Controller
     public function index()
     {
         //\
-        return view('index');
+        $products = FeaturedProduct::where('status','=',1)->get();
+        $banners = Banner::where('status','=',1)->get();
+        return view('index',['banners'=>$banners, 'products'=>$products]);
     }
 
     /**
