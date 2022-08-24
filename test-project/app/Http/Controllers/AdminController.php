@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Admin;
 use App\Models\Enquiry;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use SebastianBergmann\CodeUnit\FunctionUnit;
 use Illuminate\Support\Facades\Mail;
@@ -258,7 +259,71 @@ class AdminController extends Controller
 
     public function enquiries(){
 
-        $enquiries = Enquiry::all();
+        $enquiries = DB::table('enquiries')->orderByDesc('enquiries.id')->get();
+        return view('Admin.enquiries',['enquiries'=>$enquiries]);
+    }
+
+    public function replyEnquiryLoad($id){
+        $enquiry = Enquiry::find($id);
+
+        return view('Admin.reply_enquiry',['enquiry'=>$enquiry]);
+    }
+
+    public function replyEnquirySubmit(Request $request){
+
+        $enquiryReply = Enquiry::find($request->id);
+
+        $enquiryReply->name = $request->name;
+        $enquiryReply->email = $request->email;
+        $enquiryReply->message = $request->enquiry_message;
+        $enquiryReply->reply_message = $request->reply_message;
+        $enquiryReply->status = 1;
+
+        $enquiryReply->save();
+
+        // sending mail to the receiever
+        $content = "<html>";
+        $content .= "<head>";
+        $content .= "<title>Confirmation Email</title>";
+        $content .= "</head>";
+
+        $content .= "<body>";
+        $content .= "<h5>". $request->reply_message ."</h5>";
+        //   $content .= "<p>" . $user->otp . "</p>";
+
+
+        $content .= "</body>";
+
+        $content .= "</html>";
+
+        $mailTo = $request->email;
+        Mail::send(array(), array(), function ($message) use ($content, $mailTo) {
+            $message->to($mailTo)
+            ->subject('Enquiry Confirmation')
+            ->from(env('MAIL_FROM_ADDRESS'), env('MAIL_FROM_NAME'))
+            ->setBody($content, 'text/html');
+        });
+
+
+        return redirect('/enquiries')->with('message', 'successfully replied!');
+    }
+
+
+
+    // Enquiry search by date
+    public function enquirySearch(Request $request){
+
+        // echo $request->todate;
+        // echo $request->fromdate;
+        // die;
+        if($request->fromdate != "" && $request->todate != ""){
+
+            $enquiries = Enquiry::whereBetween('created_at',[$request->fromdate, $request->todate])->get();
+
+        }
+        else{
+            $enquiries = Enquiry::all();
+        }
         return view('Admin.enquiries',['enquiries'=>$enquiries]);
     }
 }

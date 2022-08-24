@@ -108,6 +108,20 @@ class FeaturedProductController extends Controller
 
         return view('Admin.new_featured_products');
     }
+    
+    //update status for featured products:
+    public function updateProductStatus($id){
+        $product = FeaturedProduct::find($id);
+
+        // updating status
+        if($product->status == 1){
+            $product->status = 0;
+        }else{
+            $product->status = 1;
+        }
+        $product->save();
+        return back();
+    }
 
    
 }

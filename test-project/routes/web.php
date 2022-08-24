@@ -7,6 +7,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BannerController;
 use App\Http\Controllers\FeaturedProductController;
 use App\Http\Middleware\AdminMiddleware;
+use App\Models\Admin;
 use App\Models\Banner;
 
 /*
@@ -122,11 +123,18 @@ Route::group(['middleware'=>'admin_auth'],function(){
     Route::get('/product',[FeaturedProductController::class, 'index'])->name('featured_products');
     Route::get('/new_products',[FeaturedProductController::class, 'new_featured_products'])->name('new_featured_products');
     Route::post('/new_featured_products',[FeaturedProductController::class, 'store'])->name('new_featured_products_post');
+    Route::get('/update-product-status/{id}',[FeaturedProductController::class, 'updateProductStatus'])->name('updateProductStatus');
 
 
 
     // Enquiry Routes
     Route::get('/enquiries',[AdminController::class,'enquiries'])->name('enquiries');
+
+    // load reply enquiry blade
+    
+    Route::get('/reply_enquiry/{id}', [AdminController::class, 'replyEnquiryLoad'])->name('reply_enquiry');
+    Route::post('/reply_enquiry',[AdminController::class, 'replyEnquirySubmit'])->name('reply_enquiry_post');
+    Route::post('/enquiry_search',[AdminController::class, 'enquirySearch'])->name('enquiry_search_post');
 
     Route::get('/logout',[AdminController::class, 'logout'])->name('logout');
 });

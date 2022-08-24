@@ -61,9 +61,9 @@
                                         </td>
                                         <td>
                                             @if ($product->status == 1)
-                                            <a href="" class="btn btn-success" roll="button">Active</a>
+                                            <a href="{{route('updateProductStatus',$product->id)}}" class="btn btn-success" roll="button">Active</a>
                                             @else
-                                            <a href="" class="btn btn-danger" roll="button">Inactive</a>
+                                            <a href="{{route('updateProductStatus',$product->id)}}" class="btn btn-danger" roll="button">Inactive</a>
                                             @endif
                                         </td>
                                         <td>

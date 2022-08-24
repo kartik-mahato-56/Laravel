@@ -10,7 +10,11 @@
                 </form>
                 <div class="header-button">
                    <!--class="noti-wrap" -->
+                    <div class="noti-wrap">
+                        <div class="noti__item js-item-menu">
 
+                        </div>
+                    </div>
                    <!-- end noti-wrap-->
                     <div class="account-wrap">
                         <div class="account-item clearfix js-item-menu">
