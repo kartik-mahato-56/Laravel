@@ -37,7 +37,7 @@
                                      </span>
                                      <th>
                                          <a href="{{route('new_featured_products')}}" class="btn btn-primary">
-                                         New Featured Products &nbsp; <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                                         New Products &nbsp; <i class="fa fa-plus-circle" aria-hidden="true"></i>
                      
                                          </a>
                                      </th>
@@ -67,15 +67,15 @@
                                             @endif
                                         </td>
                                         <td>
-                                            <a href="" class="text-success">
+                                            <a href="{{route('show-product',$product->id)}}" class="text-success">
                                                 <i class="fa fa-info-circle" aria-hidden="true"></i>
 
                                             </a>&nbsp;&nbsp;
-                                            <a href="" >
+                                            <a href="{{route('edit_product',$product->id)}}" >
                                                 <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                             </a>
                                             &nbsp;&nbsp;
-                                            <a href="" class="text-danger">
+                                            <a href="{{route('delete_product',$product->id)}}" class="text-danger">
                                                 <i class="fa fa-trash" aria-hidden="true"></i>
 
                                             </a>

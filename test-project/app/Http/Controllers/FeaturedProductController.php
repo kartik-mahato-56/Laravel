@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\FeaturedProduct;
+
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 class FeaturedProductController extends Controller
 {
@@ -55,7 +57,7 @@ class FeaturedProductController extends Controller
             $product->status = 0;
         }
         $product->save();
-        return redirect('/product')->with('message', 'Successfully product added!');
+        return redirect('/featured-products')->with('message', 'Successfully product added!');
     }
 
     /**
@@ -98,9 +100,15 @@ class FeaturedProductController extends Controller
      * @param  \App\Models\FeaturedProduct  $featuredProduct
      * @return \Illuminate\Http\Response
      */
-    public function destroy(FeaturedProduct $featuredProduct)
-    {
-        //
+    public function destroy(FeaturedProduct $featuredProduct,$id){
+        $product = FeaturedProduct::find($id);
+
+        $filePath = public_path('products/'.$product->image);
+        $product->delete();
+        File::delete($filePath);
+
+        return redirect('/featured-products')->with('message','Successfully deleted');
+
     }
 
 
@@ -121,6 +129,13 @@ class FeaturedProductController extends Controller
         }
         $product->save();
         return back();
+    }
+
+    // show-product
+    public function showProduct($id){
+        $product = FeaturedProduct::find($id);
+
+        return view('Admin.show-product',['product'=>$product]);
     }
 
    

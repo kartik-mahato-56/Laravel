@@ -296,7 +296,7 @@ class AdminController extends Controller
 
         $content .= "</html>";
 
-        $mailTo = $request->email;
+        $mailTo = "kartik.mahato@brainiuminfotech.com";
         Mail::send(array(), array(), function ($message) use ($content, $mailTo) {
             $message->to($mailTo)
             ->subject('Enquiry Confirmation')
@@ -320,6 +320,9 @@ class AdminController extends Controller
 
             $enquiries = Enquiry::whereBetween('created_at',[$request->fromdate, $request->todate])->get();
 
+        }
+        else if($request->fromdate == "" || $request->todate == ""){
+            return redirect('/enquiries')->with('message','please provide a valid date');
         }
         else{
             $enquiries = Enquiry::all();

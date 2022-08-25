@@ -53,7 +53,7 @@
                   </label>
                 </div>
                 <div class="text-center">
-                  <button class="btn btn-success" type="submit">Add Banner</button>
+                  <button class="btn btn-success" type="submit">Update</button>
                   <a href="{{route('banner')}}" role="button" class="btn btn-primary">Go Back</a>
 
                 </div>

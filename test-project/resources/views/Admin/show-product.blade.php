@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
   @include('Admin.common.head')
-  <title>Edit Banner</title>
+  <title>Show product</title>
 </head>
 <body class="animsition">
   <!--PAGE WRAPPER -->
@@ -24,23 +24,23 @@
         <div class="main-content">
             <div class="section__content section__content--p30">
                 <div class="login-content">
-                    <input type="hidden" name="id" value="{{$banner->id}}">
+                    <input type="hidden" name="id" value="{{$product->id}}">
                     <div class="login-form">
-                        <h4 class="text-center">Edit Banner Details</h4>
+                        <h4 class="text-center">SHow product</h4>
                         <div class="mb-3">
                         <label for="" class="form-label">Title</label>
-                        <input type="text" name="title" id="" class="form-control" value="{{$banner->title}}" aria-describedby="helpId">
+                        <input type="text" name="title" id="" class="form-control" value="{{$product->title}}" aria-describedby="helpId">
                         </div>
-                        @if($banner->image)
-                        <img src="{{asset('banners/'.$banner->image)}}" height="200px" width="200px" halt="" id="img_banner">
+                        @if($product->image)
+                        <img src="{{asset('products/'.$product->image)}}" height="50%" width="50%" halt="" id="img_product">
                         @endif
                         <div class="mb-3">
-                        <label for="" class="form-label">Banner image</label>
+                        <label for="" class="form-label">product image</label>
                         {{-- <input type="file" name="image" id="" class="form-control" placeholder="" aria-describedby="helpId"  onchange="preview()"> --}}
                         </div>
                         <div class="mb-3">
                         <label for="" class="form-label">Status</label>
-                        @if ($banner->status == 1)
+                        @if ($product->status == 1)
                         <input type="text" class="form-control" value="ACTIVE" id="" aria-describedby="helpId" placeholder="">   
                         @else
                         <input type="text" class="form-control" value="INACTIVE" id="" aria-describedby="helpId" placeholder="">   
@@ -48,7 +48,7 @@
                         @endif
                         </div>
                         <div class="d-flex justify-content-center">
-                            <a href="{{route('banner')}}"  role="button" class="btn btn-outline-success btn-sm">Go Back</a>
+                            <a href="{{route('featured_products')}}"  role="button" class="btn btn-outline-success btn-sm">Go Back</a>
                         </div>
                     </div>
                 </div>
@@ -63,7 +63,7 @@
 </body>
 </html>
 <script type="text/javascript">
-  var img1 = document.getElementById('img_banner');
+  var img1 = document.getElementById('img_product');
   function preview(){
    
    //console.log(event.target.files[0]);

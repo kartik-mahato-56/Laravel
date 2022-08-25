@@ -152,6 +152,10 @@ class BannerController extends Controller
         return back();
     }
 
+    public function view_banner($id){
+        $banner = Banner::find($id);
+        return view('Admin.banner_view',['banner'=>$banner]);
+    }
     public function banner_edit($id){
         
         $banner = Banner::find($id);
@@ -168,10 +172,6 @@ class BannerController extends Controller
         return back()->with('message', 'successfully banner deleted!');
     }
 
-    public function view_banner($id){
-        $banner = Banner::find($id);
-        return view('Admin.banner_view',['banner'=>$banner]);
-    }
 
 
     public function updatedBanner(Request $request){

@@ -1,4 +1,4 @@
-@include('Admin.common.header')
+@include('Admin.common.head')
 <body class="animsition">
     <div class="page-wrapper">
         <div class="page-content--bge5">

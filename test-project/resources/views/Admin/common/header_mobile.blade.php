@@ -21,17 +21,17 @@
                         <i class="fas fa-tachometer-alt"></i>Dashboard</a>
                     
                 </li>
-                <li class="active has-sub">
+                <li class="has-sub">
                     <a class="js-arrow" href="{{route('banner')}}">
                         <i class="fa fa-list-alt"></i>Banners
                     </a>
                 </li>
-                <li class="active has-sub">
+                <li class="has-sub">
                     <a class="js-arrow" href="{{route('enquiries')}}">
-                        <i class="fa fa-question-circle" aria-hidden="true"></i>Enquiries
+                        <i class="fa fa-envelope" aria-hidden="true"></i>Enquiries
                     </a>
                 </li>
-                <li class="active has-sub">
+                <li class="has-sub">
                     <a class="js-arrow" href="{{route('featured_products')}}">
                         <i class="fa fa-window-maximize"></i>Featured Products
                     </a>

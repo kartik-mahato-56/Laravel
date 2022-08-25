@@ -275,11 +275,11 @@ section {
 
 /*Page Objects*/
 .page-wrapper {
-    overflow: scroll;
+    overflow: hidden;
 }
 
 .page-container {
-    background: #e5e5e5;
+    background: whitesmoke;
     padding-left: 300px;
 }
 
@@ -319,7 +319,7 @@ section {
 }
 
 .page-content--bgf7 {
-    background: #f7f7f7;
+    background: #fff;
 }
 
 .page-content--bge5 {
@@ -4280,6 +4280,7 @@ section {
     border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
 
+
 .table-top-countries tbody tr:last-child td {
     border-bottom: none;
 }
@@ -4664,12 +4665,13 @@ section {
 }
 
 .table-data3 thead {
-    background: #333;
+    background: white;
+    color: black;
 }
 
 .table-data3 thead tr th {
     font-size: 16px;
-    color: #fff;
+    color: black;
     font-weight: 400;
     text-transform: capitalize;
     padding: 18px 40px;
