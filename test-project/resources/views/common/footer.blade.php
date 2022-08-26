@@ -33,14 +33,14 @@
                         <h2>Our Services</h2>
                         <ul>
                             <li class="color-white"><b>Residential Interior</b></li>
-                            <li><i class="fas fa-angle-right mr10 color-white"></i><a href="{{route('living-room')}}">Living Room</a></li>
-                            <li><i class="fas fa-angle-right mr10 color-white"></i><a href="{{route('dining-room')}}">Dining Room</a></li>
-                            <li><i class="fas fa-angle-right mr10 color-white"></i><a href="{{route('bed-room')}}">Bed Room</a></li>
-                            <li><i class="fas fa-angle-right mr10 color-white"></i><a href="{{route('kitchen')}}">Kitchen</a></li>
+                            <li><i class="fas fa-angle-right mr10 color-white"></i><a href="{{route('service-pages','living-room')}}">Living Room</a></li>
+                            <li><i class="fas fa-angle-right mr10 color-white"></i><a href="{{route('service-pages','dining-room')}}">Dining Room</a></li>
+                            <li><i class="fas fa-angle-right mr10 color-white"></i><a href="{{route('service-pages','bed-room')}}">Bed Room</a></li>
+                            <li><i class="fas fa-angle-right mr10 color-white"></i><a href="{{route('service-pages','kitchen')}}">Kitchen</a></li>
                             <li class="color-white"><b>Commercial Interior</b></li>
-                            <li><i class="fas fa-angle-right mr10 color-white"></i><a href="{{route('showroom-interior')}}">Showroom Interior</a></li>
-                            <li><i class="fas fa-angle-right mr10 color-white"></i><a href="{{route('hotel-restaurant')}}">Hotel & Restaurant Interior</a></li>
-                            <li><i class="fas fa-angle-right mr10 color-white"></i><a href="{{route('corporate-office')}}">Corporate Office Interior</a></li>
+                            <li><i class="fas fa-angle-right mr10 color-white"></i><a href="{{route('service-pages','showroom-interior')}}">Showroom Interior</a></li>
+                            <li><i class="fas fa-angle-right mr10 color-white"></i><a href="{{route('service-pages','hotel-restaurant')}}">Hotel & Restaurant Interior</a></li>
+                            <li><i class="fas fa-angle-right mr10 color-white"></i><a href="{{route('service-pages','corporate-office')}}">Corporate Office Interior</a></li>
                         </ul>
                     </div>
                     <!--/ End Latest News -->
@@ -70,7 +70,7 @@
                         <div class="row">
                             <div class="col-12 footer-link3 text-center">
                                 <a href="{{route('index')}}">Home</a>
-                                <a href="{{route('about-us')}}">About Us</a>
+                                <a href="{{route('service-pages','about-us')}}">About Us</a>
                                 <a href="{{route('terms-conditions')}}">Terms & Conditions</a>
                                 <a href="{{route('contact')}}">Contact Us</a>
                             </div>

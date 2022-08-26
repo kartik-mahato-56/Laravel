@@ -22,7 +22,7 @@
       <!-- END HEADER DESKTOP -->
 
       <div class="main-content">
-        <div class="section__content section__content--p30">
+        <div class="section__content">
           <div class="login-content">
             <form action="{{route('upadate_banner_details')}}" method="post" enctype="multipart/form-data">
               @csrf

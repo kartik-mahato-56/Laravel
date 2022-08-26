@@ -22,7 +22,7 @@
       <!-- END HEADER DESKTOP -->
 
         <div class="main-content">
-            <div class="section__content section__content--p30">
+            <div class="section__content">
                 <div class="login-content">
                     <input type="hidden" name="id" value="{{$banner->id}}">
                     <div class="login-form">

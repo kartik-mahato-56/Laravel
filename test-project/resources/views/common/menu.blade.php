@@ -5,7 +5,7 @@
             <div class="row">
                 <div class="col-lg-3 col-md-3 col-12">
                     <div class="logo">
-                        <a href="{{route('index')}}"><img src="{{asset('assets/images/logo.png')}}" alt="#"></a>
+                        <a href="{{url('index')}}"><img src="{{asset('assets/images/logo.png')}}" alt="#"></a>
                     </div>
                     <div class="mobile-menu"></div>
                 </div>
@@ -36,28 +36,28 @@
                             <!-- Main Menu -->
                             <ul id="nav" class="nav menu navbar-nav">
                                 <li><a class="active" href="{{route('index')}}">Home</a></li>
-                                <li class=""><a href="{{route('about-us')}}">About Us</a></li>
+                                <li class=""><a href="{{route('service-pages','about-us')}}">About Us</a></li>
                                 <li><a href="#">Residential Interior<i class="fa fa-angle-down"></i></a>
                                     <ul class="dropdown">
-                                        <li><a href="{{route('living-room')}}">Living Room</a></li>
-                                        <li><a href="{{route('dining-room')}}">Dining Room</a></li>
-                                        <li><a href="{{route('bed-room')}}">Bed Room</a></li>
-                                        <li><a href="{{route('kitchen')}}">Kitchen</a></li>
+                                        <li><a href="{{route('service-pages','living-room')}}">Living Room</a></li>
+                                        <li><a href="{{route('service-pages','dining-room')}}">Dining Room</a></li>
+                                        <li><a href="{{url('service-pages','bed-room')}}">Bed Room</a></li>
+                                        <li><a href="{{url('service-pages','kitchen')}}">Kitchen</a></li>
                                     </ul>
                                 </li>
                                 <li><a href="#">Commercial Interior<i class="fa fa-angle-down"></i></a>
                                     <ul class="dropdown">
-                                        <li><a href="{{route('showroom-interior')}}">Showroom Interior</a></li>
-                                        <li><a href="{{route('hotel-restaurant')}}">Hotel & Restaurant Interior</a></li>
-                                        <li><a href="{{route('corporate-office')}}">Corporate & Office Interior</a></li>
+                                        <li><a href="{{url('service-pages','showroom-interior')}}">Showroom Interior</a></li>
+                                        <li><a href="{{url('service-pages','hotel-restaurant')}}">Hotel & Restaurant Interior</a></li>
+                                        <li><a href="{{url('service-pages','corporate-office')}}">Corporate & Office Interior</a></li>
                                     </ul>
                                 </li>
-                                <li><a href="{{route('customer-stories')}}">Customer Stories</a></li>
+                                <li><a href="{{url('customer-stories')}}">Customer Stories</a></li>
                             </ul>
                             <!-- End Main Menu -->
                             <!-- button -->
                             <div class="button-1">
-                                <a href="{{route('contact')}}">Contact Us</a>
+                                <a href="{{url('contact')}}">Contact Us</a>
                             </div>
                             <!--/ End Button -->
                         </div>

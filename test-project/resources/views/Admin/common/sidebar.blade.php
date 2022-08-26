@@ -25,6 +25,18 @@
                         <i class="fa fa-window-maximize"></i>Featured Products
                     </a>
                 </li>
+                <li class=" has-sub">
+                    <a class="js-arrow" href="{{route('pages')}}">
+                        <i class="fa fa-window-restore" aria-hidden="true"></i>Pages
+                    </a>
+                    
+                </li>
+                <li class=" has-sub">
+                    <a class="js-arrow" href="">
+                        <i class="fa fa-picture-o" aria-hidden="true"></i>Images
+                    </a>
+                    
+                </li>
             </ul>
         </nav>
     </div>

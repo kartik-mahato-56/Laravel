@@ -9,6 +9,7 @@ use App\Models\FeaturedProduct;
 use App\Models\Test;
 use Illuminate\Http\Request;
 use Psy\CodeCleaner\FunctionReturnInWriteContextPass;
+use App\Models\Page;
 
 
 use function Ramsey\Uuid\v1;
@@ -71,6 +72,12 @@ class TestController extends Controller
         //
     }
 
+    public function pageLoad($slug){
+
+        $page = Page::where('slug',$slug)->first();
+
+        return view('page_load',['page'=>$page]);
+    }
     /**
      * Update the specified resource in storage.
      *

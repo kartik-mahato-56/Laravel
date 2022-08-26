@@ -6,6 +6,7 @@ use App\Http\Controllers\TestController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BannerController;
 use App\Http\Controllers\FeaturedProductController;
+use App\Http\Controllers\PageController;
 use App\Http\Middleware\AdminMiddleware;
 use App\Models\Admin;
 use App\Models\Banner;
@@ -27,30 +28,33 @@ Route::get('/welcome', function () {
 });
 Route::get('/',[TestController::class, 'index'])->name('index');
 
-Route::get('/about-us',[TestController::class, 'aboutUs'])->name('about-us');
+
+Route::get('/pages/{slug}',[TestController::class, 'pageLoad'])->name('service-pages');
+
+// Route::get('/about-us',[TestController::class, 'aboutUs'])->name('about-us');
 
 
-Route::get('/living-room',[TestController::class,'livingRoom'])->name('living-room');
+// Route::get('/living-room',[TestController::class,'livingRoom'])->name('living-room');
 
 
-Route::get('/dining-room',[TestController::class,'diningRoom'])->name('dining-room');
+// Route::get('/dining-room',[TestController::class,'diningRoom'])->name('dining-room');
 
-Route::get('/bed-room',[TestController::class,'bedRoom'])->name('bed-room');
+// Route::get('/bed-room',[TestController::class,'bedRoom'])->name('bed-room');
 
-// loads the kitchen design page
-Route::get('/kitchen',[TestController::class,'kitchen'])->name('kitchen');
+// // loads the kitchen design page
+// Route::get('/kitchen',[TestController::class,'kitchen'])->name('kitchen');
 
-// loads showroom interior design page
-Route::get('/showroom-interior',[TestController::class, 'showRoom'])->name('showroom-interior');
+// // loads showroom interior design page
+// Route::get('/showroom-interior',[TestController::class, 'showRoom'])->name('showroom-interior');
 
-// loads the hote-restaurant design page
-Route::get('/hotel-restaurant',[TestController::class,'hotelRestaurant'])->name('hotel-restaurant');
+// // loads the hote-restaurant design page
+// Route::get('/hotel-restaurant',[TestController::class,'hotelRestaurant'])->name('hotel-restaurant');
 
-// loads the corporate office page
-Route::get('/corporate-office',[TestController::class, 'corporateOffice'])->name('corporate-office');
+// // loads the corporate office page
+// Route::get('/corporate-office',[TestController::class, 'corporateOffice'])->name('corporate-office');
 
-// loads the customer-stories page
-Route::get('/customer-stories',[TestController::class, 'customerStories'])->name('customer-stories');
+// // loads the customer-stories page
+// Route::get('/customer-stories',[TestController::class, 'customerStories'])->name('customer-stories');
 
 // loads the contact us page
 Route::get('/contact', [TestController::class,'contact'])->name('contact');
@@ -132,6 +136,13 @@ Route::group(['middleware'=>'admin_auth'],function(){
     Route::get('/reply_enquiry/{id}', [AdminController::class, 'replyEnquiryLoad'])->name('reply_enquiry');
     Route::post('/reply_enquiry',[AdminController::class, 'replyEnquirySubmit'])->name('reply_enquiry_post');
     Route::post('/enquiry_search',[AdminController::class, 'enquirySearch'])->name('enquiry_search_post');
+    Route::get('/reply_enquiry_show/{id}',[AdminController::class, 'reply_enquiry_show'])->name('reply_enquiry_show');
+
+
+    // pages routes:
+    Route::get('/pages',[PageController::class, 'index'])->name('pages');
+    Route::get('/new_page',[PageController::class, 'newPage'])->name('new_page');
+    Route::post('/new_page',[PageController::class ,'store'])->name('new_page_post');
 
     // logout route
     Route::get('/logout',[AdminController::class, 'logout'])->name('logout');

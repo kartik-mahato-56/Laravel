@@ -30,6 +30,7 @@
                 @enderror
             </span>
         </div>
+       
         <div class="mb-3">
             <label for="exampleFormControlTextarea1" class="form-label mb0">Say Hi!</label>
             <textarea class="form-control" name="message" id="exampleFormControlTextarea1" rows="3"></textarea>

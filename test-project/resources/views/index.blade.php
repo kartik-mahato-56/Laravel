@@ -102,7 +102,7 @@
             <div class="col-12 col-md-6 col-lg-6">
                 <p class="text-uppercase font-24"><b class="color-orange">About Us</b></p>
                 <p class="text-justify">We welcome you, to a wonderful world of Living Space. Where interior designing don't just dazzle with style, but exemplify clever utilization of available space and offer a world of convenience too. We offers a complete range of innovative solutions right from flooring, electrical, false ceiling, painting, custom furniture, plumbing and even art works etc. Our prodicts are designed keeping in mind of space ergonomics and intelligent space planning. We offer top quality interior designing work which has a combination of design, quality, and service at an affordable price.</p>
-                <p class="mt20"><a href="{{route('about-us')}}" class="btn-1">Read More</a></p>
+                <p class="mt20"><a href="{{route('service-pages','about-us')}}" class="btn-1">Read More</a></p>
             </div>
             <div class="col-12 col-md-6 col-lg-6">
                 <div class="widget-box">

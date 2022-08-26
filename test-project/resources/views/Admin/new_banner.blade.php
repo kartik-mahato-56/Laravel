@@ -17,7 +17,7 @@
 
         <!-- MAIN CONTENT-->
         <div class="main-content">
-            <div class="section__content section__content--p30">
+            <div class="section__content">
               <div class="login-content">
                 <form action="{{route('new_banner_post')}}" method="post" enctype="multipart/form-data">
                   @csrf

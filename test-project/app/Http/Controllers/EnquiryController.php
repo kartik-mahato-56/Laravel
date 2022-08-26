@@ -97,7 +97,7 @@ class EnquiryController extends Controller
         $data ->email = $request->email;
         $data->phone = $request->phone;
         $data->message = $request->message;
-
+       
         $data->save();
         
         $content = "<html>";

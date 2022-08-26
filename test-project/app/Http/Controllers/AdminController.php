@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Admin;
+use App\Models\Banner;
 use App\Models\Enquiry;
+use App\Models\FeaturedProduct;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -128,7 +130,12 @@ class AdminController extends Controller
     }
 
     public function dashboard(Request $request){
-        return view('Admin.dashboard');
+
+        $banner = Banner::where('status','=',1)->count();
+        $product = FeaturedProduct::where('status','=',1)->count();
+        $enquiry = Enquiry::where('status','=',0)->count();
+
+        return view('Admin.dashboard',['banner'=>$banner,'enquiry'=>$enquiry,'product'=>$product]);
     }
     public function forgetPassword(){
         return view('Admin.forget-pass');
@@ -277,6 +284,7 @@ class AdminController extends Controller
         $enquiryReply->email = $request->email;
         $enquiryReply->message = $request->enquiry_message;
         $enquiryReply->reply_message = $request->reply_message;
+        $enquiryReply->reply_date = date('d-m-yy');
         $enquiryReply->status = 1;
 
         $enquiryReply->save();
@@ -328,5 +336,10 @@ class AdminController extends Controller
             $enquiries = Enquiry::all();
         }
         return view('Admin.enquiries',['enquiries'=>$enquiries]);
+    }
+
+    public function reply_enquiry_show($id){
+        $enquiry = Enquiry::find($id);
+        return view('Admin.view_reply_enquiry',['enquiry'=>$enquiry]);
     }
 }

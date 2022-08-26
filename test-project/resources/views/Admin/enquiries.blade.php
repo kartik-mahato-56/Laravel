@@ -2,6 +2,8 @@
 <html>
     @include('Admin.common.head')
     <title>Enquires List</title>
+    
+</head>
 
     <body class="animsition">
         <div class="page-wrapper">
@@ -19,7 +21,7 @@
                             <div class="table-responsive m-b-40">
                                 <div class="login-form">
                                     <div align="right">
-                                    <form action="" method="POST">
+                                    <form action="{{route('enquiry_search_post')}}" method="POST">
                                         @csrf             
                                     <div class="pb-2 row">
                                         <div class="col">
@@ -48,7 +50,7 @@
                                 </form>
                             </div>
                             <div>
-                                <table class="table table-borderless table-striped table-earning table-data3">
+                                <table class="table table-borderless table-striped table-earning table-data3" id="example">
 
                                     <thead>
                                         <tr>
@@ -66,7 +68,7 @@
                                                 <td>{{$key+1}}</td>
                                                 <td>{{$enquiry->name}}</td>
                                                 <td>{{$enquiry->email}}</td>
-                                                <td>{{$enquiry->created_at}}</td>
+                                                <td>{{date('d-m-Y',strtotime($enquiry->created_at))}}</td>
                                                 <td>
                                                     @if ($enquiry->status ==1)
                                                         <span class="text-success">Replied</span>
@@ -76,11 +78,11 @@
                                                 </td>
                                                 <td>
                                                     @if($enquiry->status==0)
-                                                        <a href="" role="button"  class="btn btn-outline-primary btn-sm"><i class="fa fa-reply" aria-hidden="true"></i></a>&nbsp;&nbsp;
+                                                        <a href="{{route('reply_enquiry',$enquiry->id)}}" role="button"  class="btn btn-outline-primary btn-sm"><i class="fa fa-reply" aria-hidden="true"></i></a>&nbsp;&nbsp;
                                                         <a href="" role="button" class="btn btn-outline-danger"><i class="fa fa-trash" aria-hidden="true"></i></a>
                                                     @else
-                                                        <a href="" role="button"  class="btn btn-outline-success btn-sm"><i class="fa fa-info-circle" aria-hidden="true"></i></a>&nbsp;&nbsp;
-                                                        <a href="" role="button" class="btn btn-outline-danger"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                                                        <a href="{{route('reply_enquiry_show',$enquiry->id)}}" role="button"  class="btn btn-outline-success btn-sm"><i class="fa fa-info-circle" aria-hidden="true"></i></a>&nbsp;&nbsp;
+                                                        <a href="{{route()}}" role="button" class="btn btn-outline-danger"><i class="fa fa-trash" aria-hidden="true"></i></a>
                                                     @endif
                                             
                                                 </td>
