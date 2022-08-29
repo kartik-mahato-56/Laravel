@@ -101,48 +101,4 @@ class TestController extends Controller
         //
     }
 
-   public function aboutUs(){
-    return view('about-us');
-
-   }
-   public function livingRoom(){
-    return view('living-room');
-   }
-
-   public function diningRoom(){
-    return view('dining-room');
-   }
-
-   public function bedRoom(){
-    return view('bed-room');
-   }
-
-   public function kitchen(){
-    return view('kitchen');
-   }
-   public function showRoom(){
-    return view('showroom-interior');
-   }
-
-   public function hotelRestaurant(){
-    return view('hotel-restaurant');
-   }
-
-   public function corporateOffice(){
-    return view('corporate-office');
-   }
-
-   public function customerStories(){
-    return view('customer-stories');
-   }
-
-
-   public function contact(){
-    return view('contact');
-   }
-
-   public function termAndCondition(){
-    return view('terms-conditions');
-   }
-
 }

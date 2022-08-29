@@ -45,7 +45,10 @@
                                 @else
                                 <img src="{{asset('users/'.$user->profile_pic)}}" id="img_prev" style="height:100px;width:100x;border-radius: 50%;" alt="">
                                 @endif
-                                <input type="file" hidden accept="image/*" name="profile_pic" class="form-control" id="avatar" onchange="preview()">
+                                <input type="file" hidden  name="profile_pic" class="form-control" id="avatar" onchange="return preview()">
+                                <span class="text-danger" id="error">
+
+                                </span>
                             </div>
                             <label for="avatar" role="button" class="btn btn-outline-success btn-sm">Profile Pic</label>
                         </div>
@@ -104,6 +107,7 @@ savebutton.addEventListener('click',function(){
 </script>
 <script type="text/javascript">
     var img1 = document.getElementById('img_prev');
+   
     function preview(){
 
      //console.log(event.target.files[0]);
@@ -112,6 +116,17 @@ savebutton.addEventListener('click',function(){
      img1.src=imagePath;
 
      img1.style.display='block';
+
+     let fileInput = document.files('avatar');
+     let filePath = fileInput.value;
+     let validExt = /(\.jpg|\.jpeg|\.png)$/i;
+     if(!validExt.exec(filePath)){
+        let text = document.getElementById('error');
+        text.innerHTML  = "please provide a file which have the extension of .jpg, .jpeg or .png";
+        fileInput.value = "";
+        return false;
+     }
+
 
     }
 

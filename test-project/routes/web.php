@@ -31,30 +31,7 @@ Route::get('/',[TestController::class, 'index'])->name('index');
 
 Route::get('/pages/{slug}',[TestController::class, 'pageLoad'])->name('service-pages');
 
-// Route::get('/about-us',[TestController::class, 'aboutUs'])->name('about-us');
 
-
-// Route::get('/living-room',[TestController::class,'livingRoom'])->name('living-room');
-
-
-// Route::get('/dining-room',[TestController::class,'diningRoom'])->name('dining-room');
-
-// Route::get('/bed-room',[TestController::class,'bedRoom'])->name('bed-room');
-
-// // loads the kitchen design page
-// Route::get('/kitchen',[TestController::class,'kitchen'])->name('kitchen');
-
-// // loads showroom interior design page
-// Route::get('/showroom-interior',[TestController::class, 'showRoom'])->name('showroom-interior');
-
-// // loads the hote-restaurant design page
-// Route::get('/hotel-restaurant',[TestController::class,'hotelRestaurant'])->name('hotel-restaurant');
-
-// // loads the corporate office page
-// Route::get('/corporate-office',[TestController::class, 'corporateOffice'])->name('corporate-office');
-
-// // loads the customer-stories page
-// Route::get('/customer-stories',[TestController::class, 'customerStories'])->name('customer-stories');
 
 // loads the contact us page
 Route::get('/contact', [TestController::class,'contact'])->name('contact');
@@ -82,21 +59,21 @@ Route::post('/forget',[AdminController::class, 'forgetPassword_'])->name('forget
 
 Route::get('/otp_verification', [AdminController::class, 'otp_verification'])->name('otp_verify');
 
-
+// admin pannel routes:all this route will work after admin login
 Route::group(['middleware'=>'admin_auth'],function(){
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
 
     Route::get('/account',[AdminController::class, 'account'])->name('account');
     // chart rout
-    Route::get('/chart',[AdminController::class, 'chartLoad'])->name('chart');
-    // route to show the table
-    Route::get('/table',[AdminController::class, 'tableShow'])->name('table');
+    // Route::get('/chart',[AdminController::class, 'chartLoad'])->name('chart');
+    // // route to show the table
+    // Route::get('/table',[AdminController::class, 'tableShow'])->name('table');
     
-    // route to load form
-    Route::get('/forms', [AdminController::class, 'loadForm'])->name('form');
+    // // route to load form
+    // Route::get('/forms', [AdminController::class, 'loadForm'])->name('form');
     
-    // route to load map
-    Route::get('/maps',[AdminController::class, 'mapLoad'])->name('map');
+    // // route to load map
+    // Route::get('/maps',[AdminController::class, 'mapLoad'])->name('map');
 
     // route for update
     Route::post('/update',[AdminController::class, 'update_details'])->name('update');
@@ -135,14 +112,16 @@ Route::group(['middleware'=>'admin_auth'],function(){
     // load reply enquiry blade
     Route::get('/reply_enquiry/{id}', [AdminController::class, 'replyEnquiryLoad'])->name('reply_enquiry');
     Route::post('/reply_enquiry',[AdminController::class, 'replyEnquirySubmit'])->name('reply_enquiry_post');
-    Route::post('/enquiry_search',[AdminController::class, 'enquirySearch'])->name('enquiry_search_post');
+    Route::post('/enquiries',[AdminController::class, 'enquirySearch'])->name('enquiry_search_post');
     Route::get('/reply_enquiry_show/{id}',[AdminController::class, 'reply_enquiry_show'])->name('reply_enquiry_show');
+    Route::get('/delete_enquiry/{id}', [AdminController::class, 'delete_enquiry'])->name('delete_enquiry');
 
 
     // pages routes:
     Route::get('/pages',[PageController::class, 'index'])->name('pages');
     Route::get('/new_page',[PageController::class, 'newPage'])->name('new_page');
     Route::post('/new_page',[PageController::class ,'store'])->name('new_page_post');
+    Route::get('/page-info/{slug}',[PageController::class, 'page_info'])->name('page_info');
 
     // logout route
     Route::get('/logout',[AdminController::class, 'logout'])->name('logout');

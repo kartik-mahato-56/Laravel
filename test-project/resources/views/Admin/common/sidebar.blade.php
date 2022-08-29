@@ -23,6 +23,7 @@
                 <li class="has-sub">
                     <a class="js-arrow" href="{{route('featured_products')}}">
                         <i class="fa fa-window-maximize"></i>Featured Products
+                       
                     </a>
                 </li>
                 <li class=" has-sub">

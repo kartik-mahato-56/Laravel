@@ -31,9 +31,9 @@
                                 New Page &nbsp; <i class="fa fa-plus-circle" aria-hidden="true"></i>
             
                                 </a>
-                        </div>
+                        </div><br>
                         <div class="table-responsive table--no-card m-b-40">
-                            <table class="table table-borderless table-striped table-earning">
+                            <table class="table table-borderless table-striped table-earning table-data3" id="example">
                                 <thead>
                             
                                  <tr>
@@ -52,9 +52,8 @@
                                             {{$page->slug}}
                                             </td>
                                             <td>
-                                                <a href="" class="btn btn-outline-success btn-sm">
+                                                <a href="{{route('page_info',$page->slug)}}" class="btn btn-outline-success btn-sm">
                                                     <i class="fa fa-info-circle" aria-hidden="true"></i>
-    
                                                 </a>&nbsp;&nbsp;
                                                 <a href="" class="btn btn-outline-primary btn-sm">
                                                     <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
@@ -62,7 +61,6 @@
                                                 &nbsp;&nbsp;
                                                 <a href="" class="btn btn-outline-danger btn-sm">
                                                     <i class="fa fa-trash" aria-hidden="true"></i>
-    
                                                 </a>
                                             </td>
                                         </tr>
@@ -82,7 +80,18 @@
 
     @include('Admin.common.footer')
 
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready( function () {
+        $('#example').DataTable();
+    } );
+    
+    </script>
+    <script>
+        if ( window.history.replaceState ) {
+            window.history.replaceState( null, null, window.location.href );
+        }
+    </script>
+    <script src="//cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" href="//cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
 
 </body>

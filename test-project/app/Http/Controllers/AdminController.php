@@ -6,6 +6,7 @@ use App\Models\Admin;
 use App\Models\Banner;
 use App\Models\Enquiry;
 use App\Models\FeaturedProduct;
+use App\Models\Page;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -134,8 +135,9 @@ class AdminController extends Controller
         $banner = Banner::where('status','=',1)->count();
         $product = FeaturedProduct::where('status','=',1)->count();
         $enquiry = Enquiry::where('status','=',0)->count();
+        $pages = Page::all()->count();
 
-        return view('Admin.dashboard',['banner'=>$banner,'enquiry'=>$enquiry,'product'=>$product]);
+        return view('Admin.dashboard',['banner'=>$banner,'enquiry'=>$enquiry,'product'=>$product,'pages'=>$pages]);
     }
     public function forgetPassword(){
         return view('Admin.forget-pass');
@@ -283,7 +285,6 @@ class AdminController extends Controller
         $enquiryReply->email = $request->email;
         $enquiryReply->message = $request->enquiry_message;
         $enquiryReply->reply_message = $request->reply_message;
-        $enquiryReply->reply_date = date('d-m-yy');
         $enquiryReply->status = 1;
 
         $enquiryReply->save();
@@ -323,22 +324,48 @@ class AdminController extends Controller
         // echo $request->todate;
         // echo $request->fromdate;
         // die;
-        if($request->fromdate != "" && $request->todate != ""){
-
+        if($request->status != ""){
+            $enquiries = Enquiry::where('status',$request->status)->get();
+            return view('Admin.enquiries',['enquiries'=>$enquiries]);
+        }
+        // else if($request->status != "" && ($request->fromdate != "" && $request->todate != "")){
+        //     $request->validate([
+        //         'fromdate' => "required|date",
+        //         "todate" => "required|date|after:fromdate"
+        //     ]);
+        
+        //     $enquiries = Enquiry::where('status',$request->status)->get();
+        //     $enquiries = $enquiries->whereBetween('created_at',[$request->fromdate, $request->todate])->get();
+        //     return view('Admin.enquiries',['enquiries'=>$enquiries]);
+        // }
+        else if($request->fromdate != "" && $request->todate != ""){
+            $request->validate([
+                'fromdate' => "required|date",
+                "todate" => "required|date| after:fromdate"
+            ]);
             $enquiries = Enquiry::whereBetween('created_at',[$request->fromdate, $request->todate])->get();
 
         }
-        else if($request->fromdate == "" || $request->todate == ""){
-            return redirect('/enquiries')->with('message','please provide a valid date');
-        }
+        
         else{
-            $enquiries = Enquiry::all();
+            $enquiries = DB::table('enquiries')->orderByDesc('enquiries.id')->get();
         }
         return view('Admin.enquiries',['enquiries'=>$enquiries]);
     }
 
+
+
+
     public function reply_enquiry_show($id){
         $enquiry = Enquiry::find($id);
         return view('Admin.view_reply_enquiry',['enquiry'=>$enquiry]);
+    }
+
+
+    public function delete_enquiry($id){
+        $enquiry = Enquiry::find($id);
+        $enquiry->delete();
+
+        return redirect('/enquiries')->with('message', 'enquiry delete successfully');
     }
 }

@@ -25,16 +25,23 @@
                                         @csrf             
                                     <div class="pb-2 row">
                                         <div class="col">
-                                            <div class="col-12-md">
+                                            <div class="col-md-12">
+                                                <label for="">Status</label>
+                                                <select name="status" id="" class="au-input">
+                                                    <option value="">select status</option>
+                                                    <option value="0">Pending</option>
+                                                    <option value="1">Replied</option>
+                                                </select>&nbsp;&nbsp;
                                                 <label for="">From</label>
                                                 <input type="date" name="fromdate" class="au-input">
                                                 
                                                 <label for="">To</label>
-                                                <input type="date" name="todate" class="au-input">
-                                               
+                                                <input type="date" name="todate" class="au-input ">
+                                                
                                                 <button type="submit" class="btn btn-outline-primary">
                                                     <i class="fa fa-search" aria-hidden="true"></i></label>
                                                 </button>
+                                                
                                                 
                                             </div>
                                             <div class="col-12-md"> @error('fromdate')
@@ -65,24 +72,25 @@
                                     <tbody>
                                         @foreach ($enquiries as $key => $enquiry )
                                             <tr>
+                                               
                                                 <td>{{$key+1}}</td>
                                                 <td>{{$enquiry->name}}</td>
                                                 <td>{{$enquiry->email}}</td>
                                                 <td>{{date('d-m-Y',strtotime($enquiry->created_at))}}</td>
                                                 <td>
-                                                    @if ($enquiry->status ==1)
+                                                    @if ($enquiry->status == 1)
                                                         <span class="text-success">Replied</span>
                                                     @else
                                                         <span class="text-danger">Pending</span>
                                                     @endif
                                                 </td>
                                                 <td>
-                                                    @if($enquiry->status==0)
+                                                    @if($enquiry->status == 0)
                                                         <a href="{{route('reply_enquiry',$enquiry->id)}}" role="button"  class="btn btn-outline-primary btn-sm"><i class="fa fa-reply" aria-hidden="true"></i></a>&nbsp;&nbsp;
-                                                        <a href="" role="button" class="btn btn-outline-danger"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                                                        <a href="{{route('delete_enquiry', $enquiry->id)}}" role="button" class="btn btn-outline-danger"><i class="fa fa-trash" aria-hidden="true"></i></a>
                                                     @else
                                                         <a href="{{route('reply_enquiry_show',$enquiry->id)}}" role="button"  class="btn btn-outline-success btn-sm"><i class="fa fa-info-circle" aria-hidden="true"></i></a>&nbsp;&nbsp;
-                                                        <a href="{{route()}}" role="button" class="btn btn-outline-danger"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                                                        <a href="{{route('delete_enquiry', $enquiry->id)}}" role="button" class="btn btn-outline-danger"><i class="fa fa-trash" aria-hidden="true"></i></a>
                                                     @endif
                                             
                                                 </td>
@@ -99,3 +107,16 @@
         @include('Admin.common.footer')
     </body>
 </html>
+<script type="text/javascript">
+    $(document).ready( function () {
+    $('#example').DataTable();
+} );
+
+</script>
+<script>
+    if ( window.history.replaceState ) {
+        window.history.replaceState( null, null, window.location.href );
+    }
+</script>
+<script src="//cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+<link rel="stylesheet" href="//cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">

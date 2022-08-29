@@ -41,6 +41,9 @@ class PageController extends Controller
     public function store(Request $request)
     {
         //
+        $request->validate([
+            'page_slug' => "required|pages.unique"
+        ]);
         $page = new Page();
         $page->name = $request->page_name;
         $page->slug = $request->page_slug;
@@ -100,6 +103,12 @@ class PageController extends Controller
         return view('Admin.new_page');
     }
 
+    // show page info:
+
+    public function page_info($slug){
+        $page = Page::where('slug',$slug)->first();
+        return view('Admin.pages_info',['page'=>$page]);
+    }
 
     
 }

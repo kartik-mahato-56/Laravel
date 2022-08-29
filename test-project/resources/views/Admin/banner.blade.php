@@ -27,21 +27,22 @@
                 <div class="section__content">
                     <div class="container-fluid">
                         <div class="table-responsive table--no-card m-b-30">
-                            <table class="table table-borderless table-striped table-earning">
+                            <div class="login-form">
+                                <a href="{{route('new_banner')}}" class="btn btn-primary">
+                                    New Banner &nbsp; <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                
+                                    </a>
+                               </div><br>
+                            <table class="table table-borderless table-striped table-earning table-data3" id="example">
                                 <thead>
-                                    <tr>
+                                   
                                      <span class="text-success">
                                          @if(session('message'))
                                          {{session('message')}}
                                          @endif
                                      </span>
-                                     <th>
-                                         <a href="{{route('new_banner')}}" class="btn btn-primary">
-                                         New Banner &nbsp; <i class="fa fa-plus-circle" aria-hidden="true"></i>
-                     
-                                         </a>
-                                     </th>
-                                    </tr>
+                                    
+                                  
                                  <tr>
                                      <th scope="col">Serial No</th>
                                      <th scope="col">Title</th>
@@ -97,7 +98,14 @@
 
     @include('Admin.common.footer')
 
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready( function () {
+        $('#example').DataTable();
+    } );
+    
+    
+    </script>
+    <script src="//cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" href="//cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
 
 </body>

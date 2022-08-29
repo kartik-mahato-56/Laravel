@@ -45,7 +45,7 @@
              
                     <div class="mb-3">
                         <button class="btn btn-outline-success btn-sm" type="submit">Reply</button>
-                      <a href="" class="btn btn-outline-danger btn-sm" roll="button">Delete</a>
+                      <a href="{{route('enquiries')}}" class="btn btn-outline-danger btn-sm" roll="button">Back</a>
                     </div>
                   </div>
                 </form>

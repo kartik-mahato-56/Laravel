@@ -58,7 +58,7 @@
                                     </div>
                                     <div class="col-md-6 col-lg-3">
                                         <div class="statistic__item statistic__item--red">
-                                            <h2 class="number">$1,060,386</h2>
+                                            <h2 class="number">{{$pages}}</h2>
                                             <span class="desc">Pages</span>
                                             <div class="icon">
                                                 <i class="fa fa-window-restore" aria-hidden="true"></i>
@@ -73,7 +73,7 @@
                 </div>
                             
                 <footer class="text-center">
-                 <i class="fa fa-copyright" aria-hidden="true"></i>Copyright@2022 all rights reserved
+                 <i class="fa fa-copyright" aria-hidden="true"></i>Copyright@2022 all rights reserved, 
                 </footer>
             </div>
             <!-- END MAIN CONTENT-->
