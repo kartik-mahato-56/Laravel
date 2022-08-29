@@ -36,6 +36,12 @@ class AdminController extends Controller
         //
     }
 
+    public function images(){
+        echo "helo";
+        die;
+        // return view('Admin.images');
+    }
+
     /**
      * Store a newly created resource in storage.
      *

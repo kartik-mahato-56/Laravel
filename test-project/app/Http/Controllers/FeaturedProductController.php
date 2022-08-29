@@ -138,5 +138,8 @@ class FeaturedProductController extends Controller
         return view('Admin.show-product',['product'=>$product]);
     }
 
-
+    public function editProduct($id){
+        $product = FeaturedProduct::find($id);
+        return view('Admin.edit_product',['product'=>$product]);
+    }
 }

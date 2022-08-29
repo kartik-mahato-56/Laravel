@@ -27,12 +27,7 @@
                 <div class="section__content">
                     <div class="container-fluid">
                         <div class="table-responsive table--no-card m-b-30">
-                            <div class="login-form">
-                                <a href="{{route('new_banner')}}" class="btn btn-primary">
-                                    New Banner &nbsp; <i class="fa fa-plus-circle" aria-hidden="true"></i>
-                
-                                    </a>
-                               </div><br>
+                            
                             <table class="table table-borderless table-striped table-earning table-data3" id="example">
                                 <thead>
                                    
@@ -68,15 +63,15 @@
                                             @endif
                                         </td>
                                         <td>
-                                            <a href="{{route('view_banner',$banner->id)}}" class="text-success">
+                                            <a href="{{route('view_banner',$banner->id)}}" class="btn btn-outline-success btn-sm" role="button">
                                                 <i class="fa fa-info-circle" aria-hidden="true"></i>
 
                                             </a>&nbsp;&nbsp;
-                                            <a href="{{route('banner_edit',$banner->id )}}" >
+                                            <a href="{{route('banner_edit',$banner->id )}}" class="btn btn-outline-primary btn-sm" role="button" >
                                                 <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                             </a>
                                             &nbsp;&nbsp;
-                                            <a href="{{route('delete_banner',$banner->id)}}" class="text-danger">
+                                            <a href="{{route('delete_banner',$banner->id)}}" class="btn btn-outline-danger btn-sm" role="button">
                                                 <i class="fa fa-trash" aria-hidden="true"></i>
 
                                             </a>

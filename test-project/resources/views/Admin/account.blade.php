@@ -28,7 +28,7 @@
                     @php
                         $user = admindata(session('ADMIN_ID'))
                     @endphp
-                    <div class="account-form">
+                    <div class="account-form section__content--p30">
                         <input type="hidden" name="id" value="{{$user->id}}">
                         <span class="text-success">
                             @if(session('password_changed'))

@@ -26,12 +26,7 @@
             <div class="main-content">
                 <div class="section__content">
                     <div class="container-fluid">
-                        <div class="login-form">
-                            <a href="{{route('new_featured_products')}}" class="btn btn-primary">
-                                New Products &nbsp; <i class="fa fa-plus-circle" aria-hidden="true"></i>
-            
-                                </a>
-                        </div><br>
+              
                         <div class="table-responsive table--no-card m-b-30">
                             <table class="table table-borderless table-striped table-earning" id="example">
                                 <thead>
@@ -67,15 +62,15 @@
                                             @endif
                                         </td>
                                         <td>
-                                            <a href="{{route('show-product',$product->id)}}" class="text-success">
+                                            <a href="{{route('show-product',$product->id)}}" class="btn btn-outline-success btn-sm">
                                                 <i class="fa fa-info-circle" aria-hidden="true"></i>
 
                                             </a>&nbsp;&nbsp;
-                                            <a href="{{route('edit_product',$product->id)}}" >
+                                            <a href="{{route('edit_product',$product->id)}}"  class="btn btn-outline-primary btn-sm">
                                                 <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                             </a>
                                             &nbsp;&nbsp;
-                                            <a href="{{route('delete_product',$product->id)}}" class="text-danger">
+                                            <a href="{{route('delete_product',$product->id)}}" class="btn btn-outline-danger btn-sm">
                                                 <i class="fa fa-trash" aria-hidden="true"></i>
 
                                             </a>

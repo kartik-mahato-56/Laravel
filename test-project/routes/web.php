@@ -117,11 +117,8 @@ Route::group(['middleware'=>'admin_auth'],function(){
     Route::get('/delete_enquiry/{id}', [AdminController::class, 'delete_enquiry'])->name('delete_enquiry');
 
 
-    // pages routes:
-    Route::get('/pages',[PageController::class, 'index'])->name('pages');
-    Route::get('/new_page',[PageController::class, 'newPage'])->name('new_page');
-    Route::post('/new_page',[PageController::class ,'store'])->name('new_page_post');
-    Route::get('/page-info/{slug}',[PageController::class, 'page_info'])->name('page_info');
+    // menubar & pages  routes:
+    
 
     // logout route
     Route::get('/logout',[AdminController::class, 'logout'])->name('logout');

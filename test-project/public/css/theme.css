@@ -14651,8 +14651,9 @@ section {
 .account-form{
     width: 100%;
     margin: 0 auto;
-    background-color: #fff;
-    color: white;
+    background-color: #ffff;
+    color: black;
+    /* color: white; */
     padding: 20px;
 }
 .profile_image{

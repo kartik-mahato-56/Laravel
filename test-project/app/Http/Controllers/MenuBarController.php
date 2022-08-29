@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Page;
+use App\Models\MenuBar;
 use Illuminate\Http\Request;
 
-class PageController extends Controller
+class MenuBarController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,13 +13,8 @@ class PageController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-
     {
         //
-
-        $pages = Page::all();
-
-        return view('Admin.pages',['pages'=>$pages]);
     }
 
     /**
@@ -41,26 +36,15 @@ class PageController extends Controller
     public function store(Request $request)
     {
         //
-        $request->validate([
-            'page_slug' => "required|pages.unique"
-        ]);
-        $page = new Page();
-        $page->name = $request->page_name;
-        $page->slug = $request->page_slug;
-        $page->description = $request->description;
-
-        $page->save();
-
-        return redirect('/pages');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Page  $page
+     * @param  \App\Models\MenuBar  $menuBar
      * @return \Illuminate\Http\Response
      */
-    public function show(Page $page)
+    public function show(MenuBar $menuBar)
     {
         //
     }
@@ -68,10 +52,10 @@ class PageController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Page  $page
+     * @param  \App\Models\MenuBar  $menuBar
      * @return \Illuminate\Http\Response
      */
-    public function edit(Page $page)
+    public function edit(MenuBar $menuBar)
     {
         //
     }
@@ -80,10 +64,10 @@ class PageController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Page  $page
+     * @param  \App\Models\MenuBar  $menuBar
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Page $page)
+    public function update(Request $request, MenuBar $menuBar)
     {
         //
     }
@@ -91,24 +75,11 @@ class PageController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Page  $page
+     * @param  \App\Models\MenuBar  $menuBar
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Page $page)
+    public function destroy(MenuBar $menuBar)
     {
         //
     }
-
-    public function newPage(){
-        return view('Admin.new_page');
-    }
-
-    // show page info:
-
-    public function page_info($slug){
-        $page = Page::where('slug',$slug)->first();
-        return view('Admin.pages_info',['page'=>$page]);
-    }
-
-    
 }
