@@ -105,7 +105,7 @@ class AdminController extends Controller
     public function register(){
         return view('Admin.register');
     }
-   
+
     public function login(Request $request){
         $request->validate([
             'email'=> 'email|required',
@@ -113,7 +113,7 @@ class AdminController extends Controller
         ]);
         $admin = Admin::where('email',"=",$request->email)->first();
         if($admin){
-            
+
             if(Hash::check($request->password, $admin->password)){
                 $request->session()->put('ADMIN_ID',$admin->id);
                 $request->session()->put('ADMIN_LOGIN',true);
@@ -122,7 +122,7 @@ class AdminController extends Controller
             else{
                 return back()->with('error', 'Invalid email or password');
             }
-            
+
         }
         else{
             return back()->with('error', 'User not registered, please click on sign up to register');
@@ -172,19 +172,18 @@ class AdminController extends Controller
                 $file_type = $request->file('profile_pic')->extension();
                 $filename = time().".".$file_type;
                 $image_path = public_path("users/");
-                if($image_path.$user->profile_pic != 0){
+                if($user->profile_pic != null){
                     unlink($image_path.$user->profile_pic);
                 }
-                else{
                     $request->file('profile_pic')->move(public_path('users/'), time() . '.' . $file_type);
                     $user->profile_pic = $filename;
-                }
+
             }
             $user->username = $request->username;
             $user->email = $request->email;
             $user->phone = $request->phone;
 
-            
+
             $user->save();
             return back()->with('message', "successfully updated user detail");
         }
@@ -201,7 +200,7 @@ class AdminController extends Controller
 
         $content .= "<body>";
         $content .= "<h5>Your OTP for password reset is:</h5>";
-      
+
       $content .=  $otp;
         //   $content .= "<p>" . $user->otp . "</p>";
 
@@ -235,7 +234,7 @@ class AdminController extends Controller
     public function changePassword(Request $request){
         // getting uuser all informatuion
         $user = Admin::find($request->id);
-        
+
         if($request->old_password != ""){
             $request->validate([
                 'new_password' => 'required',

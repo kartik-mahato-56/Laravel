@@ -23,7 +23,7 @@
             <!-- MAIN CONTENT-->
             <div class="main-content">
                 <form action="{{route('update')}}" method="post" enctype="multipart/form-data">
-                    
+
                     @csrf
                     @php
                         $user = admindata(session('ADMIN_ID'))
@@ -41,9 +41,9 @@
                         <div class="text-center">
                             <div class="profile_image">
                                 @if (!$user->profile_pic)
-                                <img src="{{asset('image/user.png')}}" alt="an image should be there" id="img_prev"/>  
+                                <img src="{{asset('image/user.png')}}" alt="an image should be there" id="img_prev"/>
                                 @else
-                                <img src="{{asset('users/'.$user->profile_pic)}}" id="img_prev" style="height:100px;width:100x;border-radius: 50%;" alt=""> 
+                                <img src="{{asset('users/'.$user->profile_pic)}}" id="img_prev" style="height:100px;width:100x;border-radius: 50%;" alt="">
                                 @endif
                                 <input type="file" hidden accept="image/*" name="profile_pic" class="form-control" id="avatar" onchange="preview()">
                             </div>
@@ -61,12 +61,12 @@
                             <label for="" class="form-label">Phone</label>
                             <input type="text" maxlength="10" class="form-control" name="phone" id="" placeholder="enter phone number" value="{{$user->phone}}">
                         </div>
-                        
+
                         <div class="text-center">
                             <button type="submit" class="btn btn-success">Update</button>
                         </div>
                     </div>
-                    
+
                 </form>
             </div>
             <!-- END MAIN CONTENT-->
@@ -85,7 +85,7 @@ var savebutton = document.getElementById('savebutton');
 var readonly = true;
 var inputs = document.querySelectorAll('input[type="text"]');
 savebutton.addEventListener('click',function(){
-    
+
      for (var i=0; i<inputs.length; i++) {
      inputs[i].toggleAttribute('readonly');
      };
@@ -98,26 +98,26 @@ savebutton.addEventListener('click',function(){
 
 
 
-     
+
 });
 
 </script>
 <script type="text/javascript">
     var img1 = document.getElementById('img_prev');
     function preview(){
-     
+
      //console.log(event.target.files[0]);
      var imagePath = URL.createObjectURL(event.target.files[0]);
      //console.log(imagePath);
      img1.src=imagePath;
 
      img1.style.display='block';
-     
+
     }
 
     addEventListener("load",function(){
         img1.style.display='block';
     });
-    
+
     </script>
     @include('Admin.common.footer')

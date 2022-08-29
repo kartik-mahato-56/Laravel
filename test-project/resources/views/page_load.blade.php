@@ -5,8 +5,8 @@
         <div class="book_preload">
             <div class="book">
                 <div class="book__page"></div>
-                <div class="book__page"></div>
-                <div class="book__page"></div>
+                {{-- <div class="book__page"></div> --}}
+                {{-- <div class="book__page"></div> --}}
             </div>
         </div>
         <!--/ End Book Preloader -->
@@ -19,12 +19,15 @@
         <div class="row">
             <div class="col-12">
                 @if($page)
-                <p class="mb5 font-family-2"><b>{{$page->name}}</b></p>
-                <p class="text-justify font-family-1">{{$page->description}}</p>
-                <p class="text-justify font-family-1 font-18">We offer top quality interior designing work which has a combination of design, quality, and service at an affordable price.</p>
+                    <p class="mb5 font-family-2"><b>{{$page->name}}</b></p>
+                    <p class="text-justify font-family-1">{{$page->description}}</p>
+                    <p class="text-justify font-family-1 font-18">We offer top quality interior designing work which has a combination of design, quality, and service at an affordable price.</p>
+                    @else
+                    <p class="mb5 font-family-2"><b>Comming Soon</b></p>
+
             @endif
             </div>
-            
+
 <!--            <div class="col-12">
                 <div class="demo-gallery">
                 <ul id="lightgallery" class="list-unstyled row">

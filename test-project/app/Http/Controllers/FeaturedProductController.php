@@ -116,7 +116,7 @@ class FeaturedProductController extends Controller
 
         return view('Admin.new_featured_products');
     }
-    
+
     //update status for featured products:
     public function updateProductStatus($id){
         $product = FeaturedProduct::find($id);
@@ -138,5 +138,5 @@ class FeaturedProductController extends Controller
         return view('Admin.show-product',['product'=>$product]);
     }
 
-   
+
 }

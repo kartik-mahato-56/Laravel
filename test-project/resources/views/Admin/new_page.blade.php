@@ -35,6 +35,7 @@
                         <option value="showroom-interior">showroom</option>
                         <option value="hotel-restaurant">hotel-restaurant</option>
                         <option value="corporate-office">corporate-office</option>
+                        <option value="customer-stories">customer-stories</option>
                       </select>
                     </div>
 
