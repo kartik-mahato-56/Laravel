@@ -6,11 +6,13 @@ namespace App\Http\Controllers;
 
 use App\Models\Banner;
 use App\Models\FeaturedProduct;
+use App\Models\MenuBar;
 use App\Models\Test;
 use Illuminate\Http\Request;
 use Psy\CodeCleaner\FunctionReturnInWriteContextPass;
 use App\Models\Page;
-
+use App\Models\SubMenu;
+use Illuminate\Support\Facades\DB;
 
 use function Ramsey\Uuid\v1;
 
@@ -74,9 +76,17 @@ class TestController extends Controller
 
     public function pageLoad($slug){
 
-        $page = Page::where('slug',$slug)->first();
+        // $pageData = MenuBar::where('slug', $slug)->get();
+        
+        // if(!$pageData){
+            
+        //     return view('Admin.page_load',['pageData'=>$pageData]);  
+        // }else{
 
-        return view('page_load',['page'=>$page]);
+        //     $pageData = SubMenu::where('slug', $slug)->get();
+            
+        //     return view('Admin.page_load',['pageData'=>$pageData]);
+        // }
     }
     /**
      * Update the specified resource in storage.

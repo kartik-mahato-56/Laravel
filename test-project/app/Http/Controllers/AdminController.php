@@ -6,12 +6,15 @@ use App\Models\Admin;
 use App\Models\Banner;
 use App\Models\Enquiry;
 use App\Models\FeaturedProduct;
+use App\Models\MainMenu;
 use App\Models\Page;
+use App\Models\SubMenu;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use SebastianBergmann\CodeUnit\FunctionUnit;
 use Illuminate\Support\Facades\Mail;
+use PhpParser\Node\Expr\FuncCall;
 
 class AdminController extends Controller
 {
@@ -141,9 +144,9 @@ class AdminController extends Controller
         $banner = Banner::where('status','=',1)->count();
         $product = FeaturedProduct::where('status','=',1)->count();
         $enquiry = Enquiry::where('status','=',0)->count();
-        $pages = Page::all()->count();
+        
 
-        return view('Admin.dashboard',['banner'=>$banner,'enquiry'=>$enquiry,'product'=>$product,'pages'=>$pages]);
+        return view('Admin.dashboard',['banner'=>$banner,'enquiry'=>$enquiry,'product'=>$product]);
     }
     public function forgetPassword(){
         return view('Admin.forget-pass');
@@ -373,5 +376,77 @@ class AdminController extends Controller
         $enquiry->delete();
 
         return redirect('/enquiries')->with('message', 'enquiry delete successfully');
+    }
+
+
+    // functions for main and sub menues
+    public function addMainMenu(){
+        return view('Admin.new_menu');
+    }
+    public function new_menu_submit(Request $request){
+        $request->validate([
+            'name'=>'required|unique:main_menus',
+            'slug' =>'required|unique:main_menus'
+        ]);
+        $mainMenu = new MainMenu();
+        $mainMenu->name = $request->name;
+        $mainMenu->slug = $request->slug;
+        $mainMenu->sub_menu = $request->sub_menu;
+
+        $mainMenu->save();
+
+        return back()->with('status', 'successfully addes main menu');
+
+    }
+    public function listMainMenu(){
+        $mainMenu = MainMenu::all();
+
+        return view('Admin.main_menu_list', ['mainMenu'=>$mainMenu]);
+    }
+
+
+
+    public function addSubMenu(){
+        $mainMenu = MainMenu::where('sub_menu',1)->get();
+        return view('Admin.add_sub_menu',['mainMenu'=>$mainMenu]);
+    }
+
+    public function submitSubMenu(Request $request){
+        $request->validate([
+            'name' => 'required|unique:sub_menus',
+            'slug' => 'required|unique:sub_menus'
+        ]);
+        $subMenu = new SubMenu();
+        $subMenu->name = $request->name;
+        $subMenu->parent_menu = $request->parent_menu;
+        $subMenu ->slug = $request->slug;
+
+        $subMenu->save();
+
+        return back()->with('status', 'successfully added sub menu');
+
+    }
+
+    public function listSubMenu(){
+
+        $subMenu = SubMenu::all();
+        return view('Admin.sub_menu_list',['subMenu'=>$subMenu]);
+    }
+
+
+
+    // pages functions
+    public function addPage(){
+        $mainMenu['mainMenu'] = MainMenu::where('sub_menu',0)->get();
+        $subMenu['subMenu'] = SubMenu::where('status',1)->get();
+
+        $slugs = array_merge($mainMenu,$subMenu);
+        foreach($slugs as $slug){
+            foreach($slug as $item){
+                echo $item['slug'] ."<br>";
+            }
+        }
+        die;
+        return view('Admin.add_page',['slugs'=>$slugs]);
     }
 }

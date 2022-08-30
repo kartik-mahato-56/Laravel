@@ -6,7 +6,6 @@ use App\Http\Controllers\TestController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BannerController;
 use App\Http\Controllers\FeaturedProductController;
-use App\Http\Controllers\PageController;
 use App\Http\Middleware\AdminMiddleware;
 use App\Models\Admin;
 use App\Models\Banner;
@@ -105,7 +104,20 @@ Route::group(['middleware'=>'admin_auth'],function(){
 
     Route::get('/delete_product/{id}',[FeaturedProductController::class, 'destroy'])->name('delete_product');
 
+    // menu bar and pages route
+        // menubar & pages  routes:
+    Route::get('/add_main_menu',[AdminController::class, 'addMainMenu'])->name('add_menu');
+    Route::post('/add_menu', [AdminController::class, 'new_menu_submit'])->name('new_menu_submit');
+    Route::get('/list_main_menu',[AdminController::class, 'listMainMenu'])->name('show_main_menu');
 
+    Route::get('/add_sub_menu', [AdminController::class, 'addSubMenu'])->name('add_sub_menu');
+    Route::post('/add_sub_menu', [AdminController::class, 'submitSubMenu'])->name('submit_sub_menu');
+    Route::get('/list_sub_menu', [AdminController::class, 'listSubMenu'])->name('list_sub_menu');
+
+
+
+    // routes for pages
+    Route::get('/add_pages',[AdminController::class, 'addPage'])->name('add_page');
 
     // Enquiry Routes
     Route::get('/enquiries',[AdminController::class,'enquiries'])->name('enquiries');

@@ -52,8 +52,26 @@
                             <!-- Main Menu -->
                             <ul id="nav" class="nav menu navbar-nav">
                                 <li><a class="active" href="{{ route('index') }}">Home</a></li>
-                                <li class=""><a href="{{ route('service-pages', 'about-us') }}">About Us</a></li>
-                                <li><a href="#">Residential Interior<i class="fa fa-angle-down"></i></a>
+                                
+                               
+                                {{--  --}}
+                                </li>
+                                @foreach (mainMenu() as $menu)
+                                    @if($menu->sub_menu == 1)
+                                        <li><a href="#">{{$menu->name}}<i class="fa fa-angle-down"></i></a>
+                                        <ul class="dropdown">
+                                           @foreach (subMenu($menu->slug) as $subMenu)
+                                               
+                                           <li><a href="{{route('service-pages', $subMenu->slug)}}">{{$subMenu->name}}</a></li>
+                                           @endforeach
+                                        </ul>
+                                    @else
+                                        <li class=""><a href="{{route('service-pages', $menu->slug)}}">{{$menu->name}}</a></li>
+                                    @endif
+            
+                                @endforeach
+
+                                {{-- <li><a href="#">Residential Interior<i class="fa fa-angle-down"></i></a>
                                     <ul class="dropdown">
                                         <li><a href="{{ route('service-pages', 'living-room') }}">Living Room</a></li>
                                         <li><a href="{{ route('service-pages', 'dining-room') }}">Dining Room</a></li>
@@ -71,7 +89,7 @@
                                                 Interior</a></li>
                                     </ul>
                                 </li>
-                                <li><a href="{{ route('service-pages','customer-stories') }}">Customer Stories</a></li>
+                                <li><a href="{{ route('service-pages','customer-stories') }}">Customer Stories</a></li> --}}
                             </ul>
                             <!-- End Main Menu -->
                             <!-- button -->

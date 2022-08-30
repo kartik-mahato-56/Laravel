@@ -32,9 +32,47 @@
                     </a>
                 </li>
                 <li class="has-sub">
-                    <a class="js-arrow" href="{{route('featured_products')}}">
-                        <i class="fa fa-window-maximize"></i>Featured Products
-                    </a>
+                    <a class="js-arrow" href="#">
+                        <i class="fa fa-window-restore" aria-hidden="true"></i>Products</a>
+                    <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
+                        <li>
+                            <a href="{{route('new_featured_products')}}">Add Product</a>
+                        </li>
+                        <li>
+                            <a href="{{route('featured_products')}}">List Products</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="has-sub">
+                    <a class="js-arrow" href="#">
+                        <i class="fas fa-tasks"></i>Menu Bar</a>
+                    <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
+                        <li>
+                            <a href="{{route('add_menu')}}">Add Main Menu</a>
+                        </li>
+                        <li>
+                            <a href="{{route('show_main_menu')}}">List Main Menu</a>
+                        </li>
+                        <li>
+                            <a href="{{route('add_sub_menu')}}">Add Sub Menu</a>
+                        </li>
+                        <li>
+                            <a href="{{route('list_sub_menu')}}">List Sub Menu</a>
+                        </li>
+                        
+                    </ul>
+                </li>
+                <li class="has-sub">
+                    <a class="js-arrow" href="#">
+                        <i class="fa fa-copy" aria-hidden="true"></i>Pages</a>
+                    <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
+                        <li>
+                            <a href="">Add Pages</a>
+                        </li>
+                        <li>
+                            <a href="">List Pages</a>
+                        </li>
+                    </ul>
                 </li>
             </ul>
         </div>
