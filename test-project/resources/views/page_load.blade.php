@@ -18,25 +18,37 @@
     <div class="container mt30 mb30">
         <div class="row">
             <div class="col-12">
-                @if($page)
-                    <p class="mb5 font-family-2"><b>{{$page->name}}</b></p>
-                    <p class="text-justify font-family-1">{{$page->description}}</p>
+                @if($pageData)
+                    <p class="mb5 font-family-2"><b>{{$pageData->name}}</b></p>
+                    <p class="text-justify font-family-1">{{$pageData->description}}</p>
                     <p class="text-justify font-family-1 font-18">We offer top quality interior designing work which has a combination of design, quality, and service at an affordable price.</p>
                     @else
                     <p class="mb5 font-family-2"><b>Comming Soon</b></p>
+                    <p class="text-justify font-family-1">Description Comming Soon</p>
 
             @endif
             </div>
-
-<!--            <div class="col-12">
-                <div class="demo-gallery">
+            
+        <div class="col-12">
+            <div class="demo-gallery">
+                @if($pageImages)
+              
                 <ul id="lightgallery" class="list-unstyled row">
-                    <li class="col-12 col-sm-4 col-md-4 col-lg-4" data-responsive="images/gallery/gallery-1.jpg" data-src="images/gallery/gallery-1.jpg" >
+                    @foreach (explode(',',$pageImages->image) as $imageData)
+                    <li class="col-12 col-sm-4 col-md-4 col-lg-4" data-responsive="{{asset('Gallery/'.$imageData)}}" data-src="{{asset('Gallery/'.$imageData)}}" >
                         <a href="">
-                            <img class="img-responsive" src="images/gallery/bedRoom-1.jpg">
-                        </a>
-                    </li>
-                    <li class="col-12 col-sm-4 col-md-4 col-lg-4" data-responsive="images/gallery/bedRoom-2.jpg" data-src="images/gallery/bedRoom-2.jpg">
+                         
+                                <img class="img-responsive" src="{{asset('Gallery/'.$imageData)}}">
+                               
+                            </a>
+                        </li>
+                        @endforeach
+                        </ul>
+                        @endif
+                    </div>
+               
+                </div>
+                <!--<li class="col-12 col-sm-4 col-md-4 col-lg-4" data-responsive="images/gallery/bedRoom-2.jpg" data-src="images/gallery/bedRoom-2.jpg">
                         <a href="">
                             <img class="img-responsive" src="images/gallery/bedRoom-2.jpg">
                         </a>

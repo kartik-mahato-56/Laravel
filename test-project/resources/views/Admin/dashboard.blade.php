@@ -58,7 +58,7 @@
                                     </div>
                                     <div class="col-md-6 col-lg-3">
                                         <div class="statistic__item statistic__item--red">
-                                            <h2 class="number">404</h2>
+                                            <h2 class="number">{{$page}}</h2>
                                             <span class="desc">Pages</span>
                                             <div class="icon">
                                                 <i class="fa fa-window-restore" aria-hidden="true"></i>

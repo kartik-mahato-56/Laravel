@@ -6,6 +6,7 @@ use App\Models\Admin;
 use App\Models\Banner;
 use App\Models\Enquiry;
 use App\Models\FeaturedProduct;
+use App\Models\Image;
 use App\Models\MainMenu;
 use App\Models\Page;
 use App\Models\SubMenu;
@@ -39,10 +40,10 @@ class AdminController extends Controller
         //
     }
 
-    public function images(){
+    public function image(){
         echo "helo";
         die;
-        // return view('Admin.images');
+        // return view('Admin.image');
     }
 
     /**
@@ -144,9 +145,10 @@ class AdminController extends Controller
         $banner = Banner::where('status','=',1)->count();
         $product = FeaturedProduct::where('status','=',1)->count();
         $enquiry = Enquiry::where('status','=',0)->count();
+        $page= Page::where('status','=',1)->count();
         
 
-        return view('Admin.dashboard',['banner'=>$banner,'enquiry'=>$enquiry,'product'=>$product]);
+        return view('Admin.dashboard',['banner'=>$banner,'enquiry'=>$enquiry,'product'=>$product,'page'=>$page]);
     }
     public function forgetPassword(){
         return view('Admin.forget-pass');
@@ -313,7 +315,7 @@ class AdminController extends Controller
 
         $content .= "</html>";
 
-        $mailTo = "kartik.mahato@brainiuminfotech.com";
+        $mailTo = $request->email;
         Mail::send(array(), array(), function ($message) use ($content, $mailTo) {
             $message->to($mailTo)
             ->subject('Enquiry Confirmation')
@@ -441,12 +443,72 @@ class AdminController extends Controller
         $subMenu['subMenu'] = SubMenu::where('status',1)->get();
 
         $slugs = array_merge($mainMenu,$subMenu);
-        foreach($slugs as $slug){
-            foreach($slug as $item){
-                echo $item['slug'] ."<br>";
-            }
-        }
-        die;
+        
         return view('Admin.add_page',['slugs'=>$slugs]);
+    }
+
+    public function addPageSubmit(Request $request){
+        $request->validate([
+            'slug' => 'required|unique:pages'
+        ]);
+        $page = new Page();
+        $page->name = $request->name;
+        $page->slug = $request->slug;
+        $page->description = $request->description;
+        $page->save();
+
+        return back()->with('status', 'successfully page addded');
+    }
+
+
+
+    // image function:
+    public function newImage(){
+
+        
+
+        $pages = Page::all();
+        return view('Admin.add_image',['pages'=>$pages]);
+    }
+
+    public function submitImage(Request $request){
+        $request->validate([
+            'category' => 'required',
+            'image' => 'required'
+        ]);
+        if(Image::where('category', $request->category)->first() != ""){
+            $pageImage = Image::where('category', $request->category)->first();
+          
+            if($request->hasfile('image'))
+                {
+                  foreach ($request->file('image') as  $value) {
+                      $file_type =$value->extension();
+                      $filename = uniqid().".".$file_type;
+                      $value->move(public_path('Gallery/'),$filename);
+                      $galley_image[] = $filename;
+                  }
+                  $pageImage->image .= ','. implode(',',$galley_image);
+                  
+                }
+            $pageImage->save();
+            return back()->with('status', 'suuccessfully added page image');
+        }
+        else{
+            $pageImage = new Image();
+            $pageImage->category = $request->category;
+            if($request->hasfile('image')){
+                
+                foreach ($request->file('image') as  $value) {
+                    $file_type =$value->extension();
+                    $filename = uniqid().".".$file_type;
+                    $value->move(public_path('Gallery/'),$filename);
+                    $galley_image[] = $filename;
+                }
+                $pageImage->image =  implode(',',$galley_image);
+                
+            }
+            $pageImage->save();
+            return back()->with('status', 'suuccessfully added page image');
+        }
     }
 }

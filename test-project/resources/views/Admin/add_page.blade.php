@@ -19,28 +19,34 @@
         <div class="main-content">
             <div class="section__content">
               <div class="login-content">
-                <form action="" method="post" enctype="multipart/form-data">
+                <form action="{{route('page_submit')}}" method="post" enctype="multipart/form-data">
                   @csrf
                   <div class="login-form">
                     @if(session('status'))
                         <span class="text-success">{{session('status')}}</span>
                     @endif
 
-                    <h3 class="text-center">Add Sub Menu</h3>
-                    @foreach ($slugs as $slug)
-                        <span>{{$slug->name}}</span>
-                    @endforeach
+                    <h3 class="text-center">Add New Page</h3>
+                   
                     <div class="mb-3">
                       <label for="" class="form-label">Page Name</label>
                       <input type="text" class="form-control" name="name" id="" aria-describedby="helpId" placeholder="">
                       
                     </div>
                     <div class="mb-3">
-                      <label for="" class="form-label">Select slug</label>
+                      <label for="" class="form-label">Select Page Menu</label>
                       <select class="form-control" name="slug" id="">
-                        <option value=""></option>
-                       
+                        <option value="">select menu</option>
+                        @foreach ($slugs as $slug)
+                            @foreach ($slug as $item)
+                                <option value="{{$item->slug}}">{{$item->name}}</option>
+                            @endforeach
+                        @endforeach
                       </select>
+                      @error('slug')
+
+                        <span class="text-danger">{{$message}}</span>
+                      @enderror
                     </div>
                     <div class="mb-3">
                       <label for="" class="form-label">Page Description</label>

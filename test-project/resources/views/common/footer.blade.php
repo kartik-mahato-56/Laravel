@@ -23,7 +23,7 @@
                         <p class="mb0"><b>Siliguri:</b></p>
                         <p class="lineheight16">96, Nazrul Sarani, Ashrampara, Siliguri - 734001</p>
 <p><i class="fas fa-envelope"></i> <a href="mailto:livingspacekolkata@gmail.com">livingspacekolkata@gmail.com</a></p>
-<p><i class="fas fa-mobile-alt"></i> +91 98320 44990/ +91 89448 88717</p>
+<p><i class="fas fa-mobile-alt"></i> +919832044990/ +918944888717</p>
                     </div>
                     <!--/ End Useful Links -->
                 </div>
@@ -32,15 +32,16 @@
                     <div class="single-widget latest-news">
                         <h2>Our Services</h2>
                         <ul>
-                            <li class="color-white"><b>Residential Interior</b></li>
-                            <li><i class="fas fa-angle-right mr10 color-white"></i><a href="{{route('service-pages','living-room')}}">Living Room</a></li>
-                            <li><i class="fas fa-angle-right mr10 color-white"></i><a href="{{route('service-pages','dining-room')}}">Dining Room</a></li>
-                            <li><i class="fas fa-angle-right mr10 color-white"></i><a href="{{route('service-pages','bed-room')}}">Bed Room</a></li>
-                            <li><i class="fas fa-angle-right mr10 color-white"></i><a href="{{route('service-pages','kitchen')}}">Kitchen</a></li>
-                            <li class="color-white"><b>Commercial Interior</b></li>
-                            <li><i class="fas fa-angle-right mr10 color-white"></i><a href="{{route('service-pages','showroom-interior')}}">Showroom Interior</a></li>
-                            <li><i class="fas fa-angle-right mr10 color-white"></i><a href="{{route('service-pages','hotel-restaurant')}}">Hotel & Restaurant Interior</a></li>
-                            <li><i class="fas fa-angle-right mr10 color-white"></i><a href="{{route('service-pages','corporate-office')}}">Corporate Office Interior</a></li>
+                            @foreach (mainMenu() as $menu)
+                            @if($menu->sub_menu == 1)
+                                   @foreach (subMenu($menu->slug) as $subMenu)   
+                                        <li><a href="{{route('service-pages', $subMenu->slug)}}">{{$subMenu->name}}</a></li>
+                                   @endforeach
+                            @else
+                                <li class=""><a href="{{route('service-pages', $menu->slug)}}">{{$menu->name}}</a></li>
+                            @endif
+                        @endforeach
+
                         </ul>
                     </div>
                     <!--/ End Latest News -->

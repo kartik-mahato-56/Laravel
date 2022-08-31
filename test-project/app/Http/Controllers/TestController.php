@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Banner;
 use App\Models\FeaturedProduct;
+use App\Models\Image;
 use App\Models\MenuBar;
 use App\Models\Test;
 use Illuminate\Http\Request;
@@ -76,17 +77,11 @@ class TestController extends Controller
 
     public function pageLoad($slug){
 
-        // $pageData = MenuBar::where('slug', $slug)->get();
-        
-        // if(!$pageData){
+            $pageData = Page::where('slug',$slug)->first();
+            $pageImage = Image::where('category', $slug)->first();
             
-        //     return view('Admin.page_load',['pageData'=>$pageData]);  
-        // }else{
 
-        //     $pageData = SubMenu::where('slug', $slug)->get();
-            
-        //     return view('Admin.page_load',['pageData'=>$pageData]);
-        // }
+            return view('page_load',['pageData'=>$pageData, 'pageImages'=>$pageImage]);
     }
     /**
      * Update the specified resource in storage.

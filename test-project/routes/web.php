@@ -63,16 +63,7 @@ Route::group(['middleware'=>'admin_auth'],function(){
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
 
     Route::get('/account',[AdminController::class, 'account'])->name('account');
-    // chart rout
-    // Route::get('/chart',[AdminController::class, 'chartLoad'])->name('chart');
-    // // route to show the table
-    // Route::get('/table',[AdminController::class, 'tableShow'])->name('table');
-    
-    // // route to load form
-    // Route::get('/forms', [AdminController::class, 'loadForm'])->name('form');
-    
-    // // route to load map
-    // Route::get('/maps',[AdminController::class, 'mapLoad'])->name('map');
+   
 
     // route for update
     Route::post('/update',[AdminController::class, 'update_details'])->name('update');
@@ -89,13 +80,13 @@ Route::group(['middleware'=>'admin_auth'],function(){
     Route::get('/view_banner/{id}',[BannerController::class, 'view_banner'])->name('view_banner');
     Route::get('/banner_edit/{id}',[BannerController::class, 'banner_edit'])->name('banner_edit');
     Route::post('/banner_edit', [BannerController::class, 'store'])->name('upadate_banner_details');
-    // banner view rout::
+    
     Route::get('/view_banner/{id}',[BannerController::class, 'view_banner'])->name('view_banner');
     // Delete banner view
     Route::get('/delete banner/{id}',[BannerController::class, 'delete_banner'])->name('delete_banner');
 
     // Featured Products
-    Route::get('/featured-products',[FeaturedProductController::class, 'index'])->name('featured_products');
+    Route::get('/featured_products',[FeaturedProductController::class, 'index'])->name('featured_products');
     Route::get('/new_products',[FeaturedProductController::class, 'new_featured_products'])->name('new_featured_products');
     Route::post('/new_featured_products',[FeaturedProductController::class, 'store'])->name('new_featured_products_post');
     Route::get('/update-product-status/{id}',[FeaturedProductController::class, 'updateProductStatus'])->name('updateProductStatus');
@@ -118,6 +109,11 @@ Route::group(['middleware'=>'admin_auth'],function(){
 
     // routes for pages
     Route::get('/add_pages',[AdminController::class, 'addPage'])->name('add_page');
+    Route::post('/add_pages',[AdminController::class,  'addPageSubmit'])->name('page_submit');
+
+    // Routes for page images
+    Route::get('/add_image', [AdminController::class, 'newImage'])->name('new_image');
+    Route::post('/add_image', [AdminController::class, 'submitImage'])->name('submit_image');
 
     // Enquiry Routes
     Route::get('/enquiries',[AdminController::class,'enquiries'])->name('enquiries');

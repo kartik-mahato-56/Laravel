@@ -12,7 +12,7 @@
                 </li>
                 <li class="has-sub">
                     <a class="js-arrow" href="#">
-                        <i class="fa fa-list-alt" aria-hidden="true"></i></i>Banners</a>
+                        <i class="fa fa-picture-o" aria-hidden="true"></i>Banners</a>
                     <ul class="list-unstyled navbar__sub-list js-sub-list">
                         <li>
                             <a href="{{route('new_banner')}}">Add Banner</a>
@@ -69,7 +69,19 @@
                             <a href="{">List Page</a>
                         </li>
                     </ul>
-                </li
+                </li>
+                <li class="has-sub">
+                    <a class="js-arrow" href="#">
+                        <i class="fa fa-file-image-o" aria-hidden="true"></i>Images</a>
+                    <ul class="list-unstyled navbar__sub-list js-sub-list">
+                        <li>
+                            <a href="{{route('new_image')}}">Add Image</a>
+                        </li>
+                        <li>
+                            <a href="">List Images</a>
+                        </li>
+                    </ul>
+                </li>
                 
             </ul>
         </nav>

@@ -52,10 +52,6 @@
                             <!-- Main Menu -->
                             <ul id="nav" class="nav menu navbar-nav">
                                 <li><a class="active" href="{{ route('index') }}">Home</a></li>
-                                
-                               
-                                {{--  --}}
-                                </li>
                                 @foreach (mainMenu() as $menu)
                                     @if($menu->sub_menu == 1)
                                         <li><a href="#">{{$menu->name}}<i class="fa fa-angle-down"></i></a>
@@ -68,28 +64,8 @@
                                     @else
                                         <li class=""><a href="{{route('service-pages', $menu->slug)}}">{{$menu->name}}</a></li>
                                     @endif
-            
                                 @endforeach
-
-                                {{-- <li><a href="#">Residential Interior<i class="fa fa-angle-down"></i></a>
-                                    <ul class="dropdown">
-                                        <li><a href="{{ route('service-pages', 'living-room') }}">Living Room</a></li>
-                                        <li><a href="{{ route('service-pages', 'dining-room') }}">Dining Room</a></li>
-                                        <li><a href="{{ route('service-pages', 'bed-room') }}">Bed Room</a></li>
-                                        <li><a href="{{ route('service-pages', 'kitchen') }}">Kitchen</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="#">Commercial Interior<i class="fa fa-angle-down"></i></a>
-                                    <ul class="dropdown">
-                                        <li><a href="{{ route('service-pages', 'showroom-interior') }}">Showroom
-                                                Interior</a></li>
-                                        <li><a href="{{ route('service-pages', 'hotel-restaurant') }}">Hotel & Restaurant
-                                                Interior</a></li>
-                                        <li><a href="{{ route('service-pages', 'corporate-office') }}">Corporate & Office
-                                                Interior</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="{{ route('service-pages','customer-stories') }}">Customer Stories</a></li> --}}
+                               
                             </ul>
                             <!-- End Main Menu -->
                             <!-- button -->
