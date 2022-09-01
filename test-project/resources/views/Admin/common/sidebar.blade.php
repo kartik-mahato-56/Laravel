@@ -41,48 +41,21 @@
                 </li>
                 <li class="has-sub">
                     <a class="js-arrow" href="#">
-                        <i class="fas fa-tasks"></i>Menu Bar</a>
+                        <i class="fas fa-copy"></i>Pages</a>
                     <ul class="list-unstyled navbar__sub-list js-sub-list">
                         <li>
-                            <a href="{{route('add_menu')}}">Add Main Menu</a>
+                            <a href="{{route('main_menu_get')}}">Add Main Page</a>
+                        </li>
+                       
+                        <li>
+                            <a href="{{route('new_sub_menu')}}">Add Sub Page</a>
                         </li>
                         <li>
-                            <a href="{{route('show_main_menu')}}">List Main Menu</a>
-                        </li>
-                        <li>
-                            <a href="{{route('add_sub_menu')}}">Add Sub Menu</a>
-                        </li>
-                        <li>
-                            <a href="{{route('list_sub_menu')}}">List Sub Menu</a>
+                            <a href="{{route('list_pages')}}">List Pages</a>
                         </li>
                         
                     </ul>
-                </li>
-                <li class="has-sub">
-                    <a class="js-arrow" href="#">
-                        <i class="fa fa-copy" aria-hidden="true"></i>Pages</a>
-                    <ul class="list-unstyled navbar__sub-list js-sub-list">
-                        <li>
-                            <a href="{{route('add_page')}}">Add Page</a>
-                        </li>
-                        <li>
-                            <a href="{">List Page</a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="has-sub">
-                    <a class="js-arrow" href="#">
-                        <i class="fa fa-file-image-o" aria-hidden="true"></i>Images</a>
-                    <ul class="list-unstyled navbar__sub-list js-sub-list">
-                        <li>
-                            <a href="{{route('new_image')}}">Add Image</a>
-                        </li>
-                        <li>
-                            <a href="">List Images</a>
-                        </li>
-                    </ul>
-                </li>
-                
+                </li> 
             </ul>
         </nav>
     </div>

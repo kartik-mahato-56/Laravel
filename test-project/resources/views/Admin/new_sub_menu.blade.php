@@ -1,6 +1,6 @@
 @include('Admin.common.head')
 {{-- <link rel="stylesheet" href="{{asset('css/style.css')}}"> --}}
-<title>New Menu</title>
+<title>New Sub Menu</title>
 <body class="animsition">
   <div class="page-wrapper">
     <!-- HEADER MOBILE-->
@@ -19,39 +19,44 @@
         <div class="main-content">
             <div class="section__content">
               <div class="login-content">
-                <form action="{{route('new_menu_submit')}}" method="post" enctype="multipart/form-data">
+                <form action="{{route('sub_menu_submit')}}" method="POST" enctype="multipart/form-data">
                   @csrf
                   <div class="login-form">
                     @if(session('status'))
                         <span class="text-success">{{session('status')}}</span>
                     @endif
 
-                    <h3 class="text-center">Add New Menu</h3>
+                    <h3 class="text-center">Add Main Menu</h3>
+                    <div class="mb-3">
+                      <label for="" class="form-label">Parent Menu</label>
+                      <select class="form-control" name="parent_id" id="">
+                        <option value="">--select--</option>
+                        @foreach ($parentMenu as $menu)
+                            <option value="{{$menu->id}}">{{$menu->name}}</option>
+                        @endforeach
+                      </select>
+                    </div>
                     <div class="mb-3">
                       <label for="" class="form-label">Name</label>
                       <input type="text"
                         class="form-control" name="name" id="" aria-describedby="helpId" placeholder="">
-                    </div>
-
-                    <div class="mb-3">
-                      <label for="" class="form-label">slug</label>
-                      <input type="text"
-                        class="form-control" name="slug" id="" aria-describedby="helpId" placeholder="">
-                        @error('slug')
+                        @error('name')
                             <span class="text-danger">{{$message}}</span>
                         @enderror
                     </div>
+
+                    
                     <div class="mb-3">
-                      <label for="" class="form-label">Sub Menu Option</label>
-                      <select class="form-control" name="sub_menu" id="">
-                        <option value="0" selected>No</option>
-                        <option value="1">Yes</option>
-                      
-                      </select>
+                      <label for="" class="form-label">Description</label>
+                      <textarea class="form-control" name="description" id="" rows="3"></textarea>
                     </div>
-                 
+                    <div class="mb-3">
+                      <label for="" class="form-label">Page images</label>
+                      <input type="file" class="form-control" name="image[]" multiple id="" placeholder="" aria-describedby="fileHelpId">
+                      
+                    </div>
                     <div class="d-flex justify-content-center">
-                        <button type="submit" class="btn btn-outline-success">Add Menu</button>
+                        <button type="submit" class="btn btn-outline-success">add sub menu</button>
                     </div>
                   </div>
                 </form>

@@ -8,8 +8,8 @@ use App\Models\Enquiry;
 use App\Models\FeaturedProduct;
 use App\Models\Image;
 use App\Models\MainMenu;
-use App\Models\Page;
 use App\Models\SubMenu;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -145,10 +145,10 @@ class AdminController extends Controller
         $banner = Banner::where('status','=',1)->count();
         $product = FeaturedProduct::where('status','=',1)->count();
         $enquiry = Enquiry::where('status','=',0)->count();
-        $page= Page::where('status','=',1)->count();
+        
         
 
-        return view('Admin.dashboard',['banner'=>$banner,'enquiry'=>$enquiry,'product'=>$product,'page'=>$page]);
+        return view('Admin.dashboard',['banner'=>$banner,'enquiry'=>$enquiry,'product'=>$product]);
     }
     public function forgetPassword(){
         return view('Admin.forget-pass');
@@ -381,134 +381,88 @@ class AdminController extends Controller
     }
 
 
-    // functions for main and sub menues
-    public function addMainMenu(){
-        return view('Admin.new_menu');
+    // function for pages
+    public function newMainMenu(){
+
+        return view('Admin.new_main_menu');
     }
-    public function new_menu_submit(Request $request){
+
+    public function newManinMenuSubmit(Request $request){
         $request->validate([
-            'name'=>'required|unique:main_menus',
-            'slug' =>'required|unique:main_menus'
+            'name' => 'required|unique:main_menus'
         ]);
-        $mainMenu = new MainMenu();
-        $mainMenu->name = $request->name;
-        $mainMenu->slug = $request->slug;
-        $mainMenu->sub_menu = $request->sub_menu;
+        $newMainMenu = new MainMenu();
 
-        $mainMenu->save();
+        $newMainMenu->name =$request->name;
+        $newMainMenu->slug = Str::slug($request->name,'_');
+        $newMainMenu->description = $request->description;
 
-        return back()->with('status', 'successfully addes main menu');
+        if($request->hasfile('image'))
+        {
+          foreach ($request->file('image') as  $value) {
+              $file_type =$value->extension();
+              $filename = uniqid().".".$file_type;
+              $value->move(public_path('Gallery/'),$filename);
+              $galley_image[] = $filename;
+          }
+          $newMainMenu->images =  implode(',',$galley_image);
+          
+        }
+
+        $newMainMenu->save();
+        return back()->with('status', "Successfully added main menu");
 
     }
-    public function listMainMenu(){
-        $mainMenu = MainMenu::all();
 
-        return view('Admin.main_menu_list', ['mainMenu'=>$mainMenu]);
+
+    public function newSubMenu(){
+        $parentMenu = MainMenu::where('status',1)->get();
+
+        return view('Admin.new_sub_menu', ['parentMenu' => $parentMenu]);
     }
 
-
-
-    public function addSubMenu(){
-        $mainMenu = MainMenu::where('sub_menu',1)->get();
-        return view('Admin.add_sub_menu',['mainMenu'=>$mainMenu]);
-    }
-
-    public function submitSubMenu(Request $request){
+    public function newSubMenuSubmit(Request $request){
         $request->validate([
-            'name' => 'required|unique:sub_menus',
-            'slug' => 'required|unique:sub_menus'
+            'name' => 'required|unique:sub_menus'
         ]);
+
         $subMenu = new SubMenu();
         $subMenu->name = $request->name;
-        $subMenu->parent_menu = $request->parent_menu;
-        $subMenu ->slug = $request->slug;
-
+        $subMenu->slug = Str::slug($request->name,'_');
+        $subMenu->parent_menu_id = $request->parent_id;
+        $subMenu->description = $request->description;
+        if($request->hasfile('image'))
+        {
+          foreach ($request->file('image') as  $value) {
+              $file_type =$value->extension();
+              $filename = uniqid().".".$file_type;
+              $value->move(public_path('Gallery/'),$filename);
+              $galley_image[] = $filename;
+          }
+          $subMenu->images =  implode(',',$galley_image);
+          
+        }
         $subMenu->save();
 
-        return back()->with('status', 'successfully added sub menu');
-
-    }
-
-    public function listSubMenu(){
-
-        $subMenu = SubMenu::all();
-        return view('Admin.sub_menu_list',['subMenu'=>$subMenu]);
-    }
-
-
-
-    // pages functions
-    public function addPage(){
-        $mainMenu['mainMenu'] = MainMenu::where('sub_menu',0)->get();
-        $subMenu['subMenu'] = SubMenu::where('status',1)->get();
-
-        $slugs = array_merge($mainMenu,$subMenu);
-        
-        return view('Admin.add_page',['slugs'=>$slugs]);
-    }
-
-    public function addPageSubmit(Request $request){
-        $request->validate([
-            'slug' => 'required|unique:pages'
-        ]);
-        $page = new Page();
-        $page->name = $request->name;
-        $page->slug = $request->slug;
-        $page->description = $request->description;
-        $page->save();
-
-        return back()->with('status', 'successfully page addded');
-    }
-
-
-
-    // image function:
-    public function newImage(){
-
-        
-
-        $pages = Page::all();
-        return view('Admin.add_image',['pages'=>$pages]);
-    }
-
-    public function submitImage(Request $request){
-        $request->validate([
-            'category' => 'required',
-            'image' => 'required'
-        ]);
-        if(Image::where('category', $request->category)->first() != ""){
-            $pageImage = Image::where('category', $request->category)->first();
-          
-            if($request->hasfile('image'))
-                {
-                  foreach ($request->file('image') as  $value) {
-                      $file_type =$value->extension();
-                      $filename = uniqid().".".$file_type;
-                      $value->move(public_path('Gallery/'),$filename);
-                      $galley_image[] = $filename;
-                  }
-                  $pageImage->image .= ','. implode(',',$galley_image);
-                  
-                }
-            $pageImage->save();
-            return back()->with('status', 'suuccessfully added page image');
+        // updating in main_menus table
+        $mainMenu = MainMenu::find($request->parent_id);
+        if($mainMenu->sub_menu == 0){
+            $mainMenu->sub_menu = 1;
         }
         else{
-            $pageImage = new Image();
-            $pageImage->category = $request->category;
-            if($request->hasfile('image')){
-                
-                foreach ($request->file('image') as  $value) {
-                    $file_type =$value->extension();
-                    $filename = uniqid().".".$file_type;
-                    $value->move(public_path('Gallery/'),$filename);
-                    $galley_image[] = $filename;
-                }
-                $pageImage->image =  implode(',',$galley_image);
-                
-            }
-            $pageImage->save();
-            return back()->with('status', 'suuccessfully added page image');
+            $mainMenu->sub_menu += 1;
+
         }
+       
+        $mainMenu->save();
+
+        return back()->with('status', 'successfully addedd sub menu');
+
+    }
+
+    public function loadPageList(){
+
+        $pages = MainMenu::where('status',1)->get();
+        return view('Admin.page_list',['pages'=>$pages]);
     }
 }

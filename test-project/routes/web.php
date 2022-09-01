@@ -97,24 +97,17 @@ Route::group(['middleware'=>'admin_auth'],function(){
 
     // menu bar and pages route
         // menubar & pages  routes:
-    Route::get('/add_main_menu',[AdminController::class, 'addMainMenu'])->name('add_menu');
-    Route::post('/add_menu', [AdminController::class, 'new_menu_submit'])->name('new_menu_submit');
-    Route::get('/list_main_menu',[AdminController::class, 'listMainMenu'])->name('show_main_menu');
+    Route::get('/new_menu',[AdminController::class, 'newMainMenu'])->name('main_menu_get');
+    Route::post('/new_menu', [AdminController::class, 'newManinMenuSubmit'])->name('_main_menu_submit');
 
-    Route::get('/add_sub_menu', [AdminController::class, 'addSubMenu'])->name('add_sub_menu');
-    Route::post('/add_sub_menu', [AdminController::class, 'submitSubMenu'])->name('submit_sub_menu');
-    Route::get('/list_sub_menu', [AdminController::class, 'listSubMenu'])->name('list_sub_menu');
+    Route::get('/new_sub_menu', [AdminController::class, 'newSubMenu'])->name('new_sub_menu');
+    Route::post('/new_sub_menu', [AdminController::class, 'newSubMenuSubmit'])->name('sub_menu_submit');
 
+    Route::get('/page_list',[AdminController::class, 'loadPageList'])->name('list_pages');
 
-
-    // routes for pages
-    Route::get('/add_pages',[AdminController::class, 'addPage'])->name('add_page');
-    Route::post('/add_pages',[AdminController::class,  'addPageSubmit'])->name('page_submit');
-
-    // Routes for page images
-    Route::get('/add_image', [AdminController::class, 'newImage'])->name('new_image');
-    Route::post('/add_image', [AdminController::class, 'submitImage'])->name('submit_image');
-
+    
+    
+    
     // Enquiry Routes
     Route::get('/enquiries',[AdminController::class,'enquiries'])->name('enquiries');
     // load reply enquiry blade

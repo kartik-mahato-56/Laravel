@@ -7,6 +7,7 @@ namespace App\Http\Controllers;
 use App\Models\Banner;
 use App\Models\FeaturedProduct;
 use App\Models\Image;
+use App\Models\MainMenu;
 use App\Models\MenuBar;
 use App\Models\Test;
 use Illuminate\Http\Request;
@@ -77,11 +78,20 @@ class TestController extends Controller
 
     public function pageLoad($slug){
 
-            $pageData = Page::where('slug',$slug)->first();
-            $pageImage = Image::where('category', $slug)->first();
+        $pageData = MainMenu::where('slug',$slug)->first();
+        
+        if(!$pageData){
+            $pageData = SubMenu::where('slug', $slug)->first();
+            
+            return view('default_page', ['pageData' => $pageData]);
+        }
+        else{
+            return view('default_page', ['pageData' => $pageData]);
+            
+        }
             
 
-            return view('page_load',['pageData'=>$pageData, 'pageImages'=>$pageImage]);
+            
     }
     /**
      * Update the specified resource in storage.

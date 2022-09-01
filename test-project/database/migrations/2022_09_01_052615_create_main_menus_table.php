@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateImagesTable extends Migration
+class CreateMainMenusTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,13 @@ class CreateImagesTable extends Migration
      */
     public function up()
     {
-        Schema::create('images', function (Blueprint $table) {
+        Schema::create('main_menus', function (Blueprint $table) {
             $table->id();
-            $table->string('category');
-            $table->string('image',500);
+            $table->string('name');
+            $table->string('slug');
+            $table->string('description', 500)->nullable();
+            $table->string('images',500)->nullable();
+            $table->string('sub_menu')->default(0);
             $table->integer('status')->default(1);
             $table->timestamps();
         });
@@ -29,6 +32,6 @@ class CreateImagesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('images');
+        Schema::dropIfExists('main_menus');
     }
 }

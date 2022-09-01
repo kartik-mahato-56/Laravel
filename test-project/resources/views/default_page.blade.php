@@ -31,23 +31,21 @@
             
         <div class="col-12">
             <div class="demo-gallery">
-                @if($pageImages)
+                @if($pageData->images)
               
                 <ul id="lightgallery" class="list-unstyled row">
-                    @foreach (explode(',',$pageImages->image) as $imageData)
+                    @foreach (explode(',',$pageData->images) as $imageData)
                     <li class="col-12 col-sm-4 col-md-4 col-lg-4" data-responsive="{{asset('Gallery/'.$imageData)}}" data-src="{{asset('Gallery/'.$imageData)}}" >
                         <a href="">
-                         
-                                <img class="img-responsive" src="{{asset('Gallery/'.$imageData)}}">
-                               
-                            </a>
-                        </li>
-                        @endforeach
-                        </ul>
-                        @endif
-                    </div>
+                            <img class="img-responsive" src="{{asset('Gallery/'.$imageData)}}">    
+                        </a>
+                    </li>
+                    @endforeach
+                </ul>
+                @endif
+            </div>
                
-                </div>
+        </div>
                 <!--<li class="col-12 col-sm-4 col-md-4 col-lg-4" data-responsive="images/gallery/bedRoom-2.jpg" data-src="images/gallery/bedRoom-2.jpg">
                         <a href="">
                             <img class="img-responsive" src="images/gallery/bedRoom-2.jpg">

@@ -32,7 +32,7 @@
                     <div class="single-widget latest-news">
                         <h2>Our Services</h2>
                         <ul>
-                            @foreach (mainMenu() as $menu)
+                            {{-- @foreach (mainMenu() as $menu)
                             @if($menu->sub_menu == 1)
                                    @foreach (subMenu($menu->slug) as $subMenu)   
                                         <li><a href="{{route('service-pages', $subMenu->slug)}}">{{$subMenu->name}}</a></li>
@@ -40,7 +40,7 @@
                             @else
                                 <li class=""><a href="{{route('service-pages', $menu->slug)}}">{{$menu->name}}</a></li>
                             @endif
-                        @endforeach
+                        @endforeach --}}
 
                         </ul>
                     </div>

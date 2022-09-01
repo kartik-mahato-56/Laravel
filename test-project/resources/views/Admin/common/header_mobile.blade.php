@@ -48,16 +48,16 @@
                         <i class="fas fa-tasks"></i>Menu Bar</a>
                     <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
                         <li>
-                            <a href="{{route('add_menu')}}">Add Main Menu</a>
+                            <a href="">Add Main Menu</a>
                         </li>
                         <li>
-                            <a href="{{route('show_main_menu')}}">List Main Menu</a>
+                            <a href="">List Main Menu</a>
                         </li>
                         <li>
-                            <a href="{{route('add_sub_menu')}}">Add Sub Menu</a>
+                            <a href="">Add Sub Menu</a>
                         </li>
                         <li>
-                            <a href="{{route('list_sub_menu')}}">List Sub Menu</a>
+                            <a href="">List Sub Menu</a>
                         </li>
                         
                     </ul>

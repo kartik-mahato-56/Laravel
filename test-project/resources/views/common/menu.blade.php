@@ -53,16 +53,16 @@
                             <ul id="nav" class="nav menu navbar-nav">
                                 <li><a class="active" href="{{ route('index') }}">Home</a></li>
                                 @foreach (mainMenu() as $menu)
-                                    @if($menu->sub_menu == 1)
+                                    @if($menu->sub_menu >0)
                                         <li><a href="#">{{$menu->name}}<i class="fa fa-angle-down"></i></a>
                                         <ul class="dropdown">
-                                           @foreach (subMenu($menu->slug) as $subMenu)
+                                           @foreach (subMenu($menu->id) as $subMenu)
                                                
                                            <li><a href="{{route('service-pages', $subMenu->slug)}}">{{$subMenu->name}}</a></li>
                                            @endforeach
                                         </ul>
                                     @else
-                                        <li class=""><a href="{{route('service-pages', $menu->slug)}}">{{$menu->name}}</a></li>
+                                    <li class=""><a href="{{route('service-pages', $menu->slug)}}">{{$menu->name}}</a></li>
                                     @endif
                                 @endforeach
                                
