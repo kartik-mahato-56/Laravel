@@ -150,10 +150,10 @@
 						</div>
 						<div class="modal-body">
 							<p>
-								Which page info you want to delete?
+								Which page you want to delete?
 							</p>
 						</div>
-						<div class="modal-footer">
+						<div class="modal-footer  d-flex justify-content-center">
 							<a href="" roll="button" class="btn btn-primary" >Main Page</a>
 							<a href="" roll="button" class="btn btn-primary">Sub Page</a>
 						</div>
