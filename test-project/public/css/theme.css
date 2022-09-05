@@ -244,6 +244,7 @@ section {
     position: relative;
     margin: 0 auto;
     z-index: 1;
+    background-color: white;
 }
 
 .section__content--w1830 {
@@ -310,6 +311,7 @@ section {
 .main-content {
     padding-top: 116px;
     min-height: 100vh;
+
 }
 
 @media (max-width: 991px) {
@@ -14786,5 +14788,7 @@ section {
     background-color: white;
 }
 
-
+.new-page{
+    margin-left: 10px;
+}
 

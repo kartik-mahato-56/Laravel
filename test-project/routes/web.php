@@ -6,6 +6,7 @@ use App\Http\Controllers\TestController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BannerController;
 use App\Http\Controllers\FeaturedProductController;
+use App\Http\Controllers\PageController;
 use App\Http\Middleware\AdminMiddleware;
 use App\Models\Admin;
 use App\Models\Banner;
@@ -97,14 +98,19 @@ Route::group(['middleware'=>'admin_auth'],function(){
 
     // menu bar and pages route
         // menubar & pages  routes:
-    Route::get('/new_menu',[AdminController::class, 'newMainMenu'])->name('main_menu_get');
-    Route::post('/new_menu', [AdminController::class, 'newManinMenuSubmit'])->name('_main_menu_submit');
+    Route::get('/main_page_list', [PageController::class, 'listMainPage'])->name('main_page_list');
+    Route::get('/new_main_page', [PageController::class, 'newMainPage'])->name('new_main_page');
+    Route::post('/new_main_page', [PageController::class, 'newMainPageSubmit'])->name('new_main_page_submit');
+    
+    
+    Route::get('/sub_page_list', [PageController::class, 'listSubPages'])->name('sub_page_list');
+    Route::get('/new_sub_page', [PageController::class, 'newSubPage'])->name('new_sub_page');
+    Route::post('/new_sub_page', [PageController::class, 'subPageSubmit'])->name('sub_page_submit');
 
-    Route::get('/new_sub_menu', [AdminController::class, 'newSubMenu'])->name('new_sub_menu');
-    Route::post('/new_sub_menu', [AdminController::class, 'newSubMenuSubmit'])->name('sub_menu_submit');
+    Route::get('/page_details', [PageController::class, 'pageDetails'])->name('page_details');
+    Route::get('/subpagessend', [PageController::class, 'subpagessend'])->name('subpagessend');
 
-    Route::get('/page_list',[AdminController::class, 'loadPageList'])->name('list_pages');
-
+    Route::post('/page_details',[ PageController::class, 'pageDetailsSubmit'])->name('page_details_submit');
     
     
     
@@ -115,7 +121,7 @@ Route::group(['middleware'=>'admin_auth'],function(){
     Route::post('/reply_enquiry',[AdminController::class, 'replyEnquirySubmit'])->name('reply_enquiry_post');
     Route::post('/enquiries',[AdminController::class, 'enquirySearch'])->name('enquiry_search_post');
     Route::get('/reply_enquiry_show/{id}',[AdminController::class, 'reply_enquiry_show'])->name('reply_enquiry_show');
-    Route::get('/delete_enquiry/{id}', [AdminController::class, 'delete_enquiry'])->name('delete_enquiry');
+    Route::post('/delete_enquiry/{id}', [AdminController::class, 'delete_enquiry'])->name('delete_enquiry');
 
 
     // menubar & pages  routes:

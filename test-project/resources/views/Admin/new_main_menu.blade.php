@@ -1,6 +1,6 @@
 @include('Admin.common.head')
 {{-- <link rel="stylesheet" href="{{asset('css/style.css')}}"> --}}
-<title>New Menu</title>
+<title>New Main Menu</title>
 <body class="animsition">
   <div class="page-wrapper">
     <!-- HEADER MOBILE-->
@@ -19,7 +19,7 @@
         <div class="main-content">
             <div class="section__content">
               <div class="login-content">
-                <form action="{{route('_main_menu_submit')}}" method="POST" enctype="multipart/form-data">
+                <form action="{{route('new_main_page_submit')}}" method="POST" enctype="multipart/form-data">
                   @csrf
                   <div class="login-form">
                     @if(session('status'))
@@ -30,21 +30,10 @@
                     <div class="mb-3">
                       <label for="" class="form-label">Name</label>
                       <input type="text"
-                        class="form-control" name="name" id="" aria-describedby="helpId" placeholder="">
+                        class="form-control" name="name" id="" placeholder="enter main menu name" aria-describedby="helpId" placeholder="">
                         @error('name')
                             <span class="text-danger">{{$message}}</span>
                         @enderror
-                    </div>
-
-                    
-                    <div class="mb-3">
-                      <label for="" class="form-label">Description</label>
-                      <textarea class="form-control" name="description" id="" rows="3"></textarea>
-                    </div>
-                    <div class="mb-3">
-                      <label for="" class="form-label">Page images</label>
-                      <input type="file" class="form-control" name="image[]" multiple id="" placeholder="" aria-describedby="fileHelpId">
-                      
                     </div>
                     <div class="d-flex justify-content-center">
                         <button type="submit" class="btn btn-outline-success">add main menu</button>

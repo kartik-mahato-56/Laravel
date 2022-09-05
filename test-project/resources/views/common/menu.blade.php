@@ -52,7 +52,7 @@
                             <!-- Main Menu -->
                             <ul id="nav" class="nav menu navbar-nav">
                                 <li><a class="active" href="{{ route('index') }}">Home</a></li>
-                                @foreach (mainMenu() as $menu)
+                                {{-- @foreach (mainPage() as $menu)
                                     @if($menu->sub_menu >0)
                                         <li><a href="#">{{$menu->name}}<i class="fa fa-angle-down"></i></a>
                                         <ul class="dropdown">
@@ -64,7 +64,7 @@
                                     @else
                                     <li class=""><a href="{{route('service-pages', $menu->slug)}}">{{$menu->name}}</a></li>
                                     @endif
-                                @endforeach
+                                @endforeach --}}
                                
                             </ul>
                             <!-- End Main Menu -->

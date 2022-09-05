@@ -44,14 +44,14 @@
                         <i class="fas fa-copy"></i>Pages</a>
                     <ul class="list-unstyled navbar__sub-list js-sub-list">
                         <li>
-                            <a href="{{route('main_menu_get')}}">Add Main Page</a>
+                            <a href="{{route('main_page_list')}}">Main Pages</a>
                         </li>
                        
                         <li>
-                            <a href="{{route('new_sub_menu')}}">Add Sub Page</a>
+                            <a href="{{route('sub_page_list')}}">Sub Pages</a>
                         </li>
                         <li>
-                            <a href="{{route('list_pages')}}">List Pages</a>
+                            <a href="{{route('page_details')}}">Page Details</a>
                         </li>
                         
                     </ul>

@@ -19,7 +19,6 @@ class CreateMainMenusTable extends Migration
             $table->string('slug');
             $table->string('description', 500)->nullable();
             $table->string('images',500)->nullable();
-            $table->string('sub_menu')->default(0);
             $table->integer('status')->default(1);
             $table->timestamps();
         });

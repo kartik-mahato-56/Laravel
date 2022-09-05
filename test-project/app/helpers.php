@@ -8,14 +8,14 @@ function admindata($id){
     return $userdetails;
 };
 
-function mainMenu(){
+function mainPage(){
     $mainMenu = MainMenu::where('status',1)->get();
     
     return $mainMenu;
 }
 
 function subMenu($parent_id){
-    $subMenu = SubMenu::where('parent_menu_id', $parent_id)->get();
+    $subMenu = MainMenu::where('id', $parent_id)->get();
     return $subMenu;
 }
 

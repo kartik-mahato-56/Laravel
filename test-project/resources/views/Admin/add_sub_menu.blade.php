@@ -19,41 +19,33 @@
         <div class="main-content">
             <div class="section__content">
               <div class="login-content">
-                <form action="{{route('submit_sub_menu')}}" method="post" enctype="multipart/form-data">
+                <form action="" method="POST" enctype="multipart/form-data">
                   @csrf
                   <div class="login-form">
                     @if(session('status'))
                         <span class="text-success">{{session('status')}}</span>
                     @endif
 
-                    <h3 class="text-center">Add Sub Menu</h3>
+                    <h3 class="text-center">Add Main Menu</h3>
                     <div class="mb-3">
-
-                      <label for="" class="form-label">Parent Menu</label>
-                      <select class="form-control" name="parent_menu" id="">
-                        <option value="">seelct parent menu</option>
-                      @foreach ($mainMenu as $menu)
-                      <option value="{{$menu->slug}}">{{$menu->name}}</option>
-                          
-                      @endforeach
+                      <label for="" class="form-label">Select Parent Page</label>
+                      <select class="form-control" name="parent_page" id="">
+                        <option>--- select ---</option>
+                        @foreach ($mainPage as $page)
+                            <option value="{{$page->id}}">{{$page->name}}</option>
+                        @endforeach
                       </select>
                     </div>
                     <div class="mb-3">
                       <label for="" class="form-label">Name</label>
-                      <input type="text" class="form-control" name="name" id="" aria-describedby="helpId" placeholder="">
-                    </div>
-                    <div class="mb-3">
-                      <label for="" class="form-label">slug</label>
                       <input type="text"
-                        class="form-control" name="slug" id="" aria-describedby="helpId" placeholder="">
-                        @error('slug')
+                        class="form-control" name="name" id="" placeholder="enter main menu name" aria-describedby="helpId" placeholder="">
+                        @error('name')
                             <span class="text-danger">{{$message}}</span>
                         @enderror
                     </div>
-
-                    
                     <div class="d-flex justify-content-center">
-                        <button type="submit" class="btn btn-outline-success">Add Menu</button>
+                        <button type="submit" class="btn btn-outline-success">add main menu</button>
                     </div>
                   </div>
                 </form>

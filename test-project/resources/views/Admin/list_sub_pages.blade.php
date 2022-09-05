@@ -1,5 +1,5 @@
 @include('Admin.common.head')
-<title>Banner Page</title>
+<title>Sub Pages List</title>
 {{-- <link rel="stylesheet" href="{{asset('css/style.css')}}"> --}}
 <link rel="stylesheet" href="//cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
 <script src="//cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
@@ -24,10 +24,15 @@
 
             <!-- MAIN CONTENT-->
             <div class="main-content">
-                <div class="section__content section__content--p30">
+                <div class="section__content">
                     <div class="container-fluid">
                         <div class="table-responsive table--no-card m-b-30">
-                            
+                            <div class="login-form new-page">
+                                <a href="{{route('new_sub_page')}}" role="button" class="btn btn-outline-primary btn-sm">
+                                   New Sub Page <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                                </a>
+                            </div>
+                            <br>
                             <table class="table table-borderless table-striped table-earning table-data3" id="example">
                                 <thead>
                                    
@@ -40,43 +45,38 @@
                                   
                                  <tr>
                                      <th scope="col">Serial No</th>
-                                     <th scope="col">Title</th>
-                                     <th scope="col">Image</th>
+                                     <th scope="col">Page Name</th>
+                                     <th scope="col">Main Page Name</th>
                                      <th scope="col">status</th>
                                      <th>Action</th>
                                      
                                  </tr>
                                  </thead>
                                 <tbody>
-                                    @foreach ($banners as $key=>$banner)
-                                    <tr>
-                                        <td>{{$key+1}}</td>
-                                        <td>{{$banner->title}}</td>                
-                                        <td>
-                                            <img src="{{asset('banners/'.$banner->image)}}" height="100px"  width="100px" alt="">
-                                        </td>
-                                        <td>
-                                            @if ($banner->status == 1)
-                                            <a href="{{route('banner_status', $banner->id)}}" class="btn btn-success" roll="button">Active</a>
-                                            @else
-                                            <a href="{{route('banner_status', $banner->id)}}" class="btn btn-danger" roll="button">Inactive</a>
-                                            @endif
-                                        </td>
-                                        <td>
-                                            <a href="{{route('view_banner',$banner->id)}}" class="btn btn-outline-success btn-sm" role="button">
-                                                <i class="fa fa-info-circle" aria-hidden="true"></i>
 
-                                            </a>&nbsp;&nbsp;
-                                            <a href="{{route('banner_edit',$banner->id )}}" class="btn btn-outline-primary btn-sm" role="button" >
-                                                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                                            </a>
-                                            &nbsp;&nbsp;
-                                            <a href="{{route('delete_banner',$banner->id)}}" class="btn btn-outline-danger btn-sm" role="button">
-                                                <i class="fa fa-trash" aria-hidden="true"></i>
-
-                                            </a>
-                                        </td>
-                                    </tr>
+                                    @foreach ($subPages as $serial => $page)
+                                        <tr>
+                                            <td>{{$serial+1}}</td>
+                                            <td>{{$page->name}}</td>
+                                            <td>
+                                            @foreach (subMenu($page->parent_menu_id) as $parentPage)
+                                                {{$parentPage->name}}    
+                                                @endforeach
+                                            </td>
+                                            <td>
+                                                @if($page->status == 1)
+                                                    <a href="http://" roll='button' class="btn btn-success btn-sm"  data-toggle="tooltip" data-placement="top" title="click to inactive">Active</a>
+                                                @else
+                                                    <a href="http://" roll='button' class="btn btn-danger btn-sm"  data-toggle="tooltip" data-placement="top" title="click to active">Inctive</a>
+                                                @endif  
+                                            </td>
+                                            <td>
+                                                <a href="" class="btn btn-outline-danger btn-sm" role="button">
+                                                    <i class="fa fa-trash" aria-hidden="true"></i>
+    
+                                                </a>
+                                            </td>
+                                        </tr>
                                     @endforeach
                                    
                                 </tbody>
