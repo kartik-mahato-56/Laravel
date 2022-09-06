@@ -6,6 +6,8 @@
 
 <!-- Title Page-->
 {{-- <title>Dashboard</title> --}}
+<link rel = "icon" type = "image/png" href = "{{asset('assets\images\admin-logo.png')}}">
+
 
 <!-- Fontfaces CSS-->
 <link href="{{asset('css/font-face.css')}}" rel="stylesheet" media="all">

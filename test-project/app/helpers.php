@@ -15,7 +15,7 @@ function mainPage(){
 }
 
 function subMenu($parent_id){
-    $subMenu = MainMenu::where('id', $parent_id)->get();
+    $subMenu = SubMenu::where('parent_menu_id', $parent_id)->where('status',1)->get();
     return $subMenu;
 }
 

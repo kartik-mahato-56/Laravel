@@ -8,6 +8,7 @@
     $('#example').DataTable();
 } );
 </script>
+
 <body class="animsition">
     <div class="page-wrapper">
         <!-- HEADER MOBILE-->
@@ -59,21 +60,21 @@
                                             <td>{{$serial+1}}</td>
                                             <td>{{$page->name}}</td>
                                             <td>
-                                            @foreach (subMenu($page->parent_menu_id) as $parentPage)
-                                                {{$parentPage->name}}    
-                                                @endforeach
+                                                {{App\Http\Controllers\PageController::getParentPage($page->parent_menu_id)}}
                                             </td>
                                             <td>
                                                 @if($page->status == 1)
-                                                    <a href="http://" roll='button' class="btn btn-success btn-sm"  data-toggle="tooltip" data-placement="top" title="click to inactive">Active</a>
+                                                    <a href="{{route('sub_page_status',$page->id)}}" roll='button' class="btn btn-success btn-sm"  data-toggle="tooltip" data-placement="top" title="click to inactive">Active</a>
                                                 @else
-                                                    <a href="http://" roll='button' class="btn btn-danger btn-sm"  data-toggle="tooltip" data-placement="top" title="click to active">Inctive</a>
+                                                    <a href="{{route('sub_page_status',$page->id)}}" roll='button' class="btn btn-danger btn-sm"  data-toggle="tooltip" data-placement="top" title="click to active">Inctive</a>
                                                 @endif  
                                             </td>
                                             <td>
-                                                <a href="" class="btn btn-outline-danger btn-sm" role="button">
+                                                <a href=""  type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#mediumModal">
+                                                    <i class="fa fa-info-circle" aria-hidden="true"></i>
+                                                </a>&nbsp;&nbsp;
+                                                <a href="" class="btn btn-outline-danger" role="button"  onclick="confirm('Are you sure want to delete?')">
                                                     <i class="fa fa-trash" aria-hidden="true"></i>
-    
                                                 </a>
                                             </td>
                                         </tr>
@@ -84,11 +85,32 @@
                     </div>
                 </div>
                 
-            </div>
-            <!-- END MAIN CONTENT-->
-            <!-- END PAGE CONTAINER-->
-        </div>
-
+            </div> <!-- END MAIN CONTENT-->
+            <div class="modal fade" id="mediumModal" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true">
+				<div class="modal-dialog modal-lg" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="mediumModalLabel">Medium Modal</h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+							<p>
+								There are three species of zebras: the plains zebra, the mountain zebra and the Grévy's zebra. The plains zebra and the mountain
+								zebra belong to the subgenus Hippotigris, but Grévy's zebra is the sole species of subgenus Dolichohippus. The latter
+								resembles an ass, to which it is closely related, while the former two are more horse-like. All three belong to the
+								genus Equus, along with other living equids.
+							</p>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+							<button type="button" class="btn btn-primary">Confirm</button>
+						</div>
+					</div>
+				</div>
+			</div>
+        </div> <!-- END PAGE CONTAINER-->
     </div>
 
     @include('Admin.common.footer')

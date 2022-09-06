@@ -22,7 +22,7 @@
       <!-- END HEADER DESKTOP -->
 
         <div class="main-content">
-            <div class="section__content">
+            <div class="section__content section__content--p30 ">
                 <div class="login-content">
                     
                     <div class="login-form">
@@ -30,21 +30,41 @@
                         <div class="mb-3">
                           <label for="" class="form-label">Page Name</label>
                           <input type="text"
-                            class="form-control" name="" id="" value="{{$page->name}}" aria-describedby="helpId" placeholder="">
-                          
+                            class="form-control" name="" id="" value="{{$pageInfo->name}}">
+                         
+                        </div>
+                        @if($pageInfo->sub_menu_status != 0)
+                            <div class="mb-3">
+                              <label for="" class="form-label">Sub Pages</label>
+                              <select class="form-control" name="" id="">
+                                @foreach (subMenu($pageInfo->id) as $subPage)
+                                <option>{{$subPage->name}}</option> 
+                                @endforeach
+                                
+                              </select>
+                            </div>
+                        @else
+                        <label for="" class="form-label">Sub Pages</label>
+                        <input class="form-control" type="text" placeholder="No Sub Pages" disabled>
+                        @endif
+
+                        <div class="mb-3">
+                          <label for="" class="form-label">Description</label>
+                          <textarea class="form-control" name="" id="" rows="3" readonly>{{$pageInfo->description}}</textarea>
                         </div>
                         <div class="mb-3">
-                          <label for="" class="form-label">Page Slug</label>
-                          <input type="text"
-                            class="form-control" name="" id="" value="{{$page->slug}}" aria-describedby="helpId" placeholder="">
-                          
-                        </div>
-                        <div class="mb-3">
-                          <label for="" class="form-label">Page Description</label>
-                          <textarea class="form-control" name="" id="" rows="3">{{$page->description}}</textarea>
+                          <label for="" class="form-label">Images</label><br>
+                          @if($pageInfo->images != "")
+                            @foreach (explode(',',$pageInfo->images) as $image)
+                            <img  src="{{asset('Gallery/'.$image)}}" width="200px" height="200px" alt="">&nbsp;&nbsp;
+                                
+                            @endforeach
+                          @else
+
+                          @endif
                         </div>
                         <div class="d-flex justify-content-center">
-                            <a href="{{route('pages')}}"  role="button" class="btn btn-outline-success btn-sm">Go Back</a>
+                            <a href="{{route('main_page_list')}}" class="btn btn-outline-primary">Back</a>
                         </div>
                     </div>
                 </div>

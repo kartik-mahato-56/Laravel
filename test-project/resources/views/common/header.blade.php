@@ -11,7 +11,7 @@
         <!-- Title -->
         <title>Living Space</title>
         <!-- Favicon -->
-
+        <link rel = "icon" type = "image/png" href = "{{asset('assets\images\livingroom-icon.png')}}">
          <link rel="icon" type="image/png" href="https://livingspacecreation.com/images/32-X-32.png"/>
         <!-- Web Font -->
         <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900" rel="stylesheet">

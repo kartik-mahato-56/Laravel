@@ -37,8 +37,8 @@ class PageController extends Controller
     }
 
     public function listSubPages(){
-        $subPages = SubMenu::all();
-        return view('Admin.list_sub_pages',['subPages' =>$subPages]);
+        $subPages = SubMenu::orderBy('parent_menu_id','asc')->get();
+        return view('Admin.sub_page_list',['subPages' =>$subPages]);
     }
 
     public function newSubPage(){
@@ -61,7 +61,7 @@ class PageController extends Controller
         $newSubPage->save();
 
         // updating main page sub_menu field status.
-        $mainPage = MainMenu::find($request->parent_page_id);
+        $mainPage = MainMenu::find($request->parent_page);
         if($mainPage->sub_menu_status == 0){
             $mainPage->sub_menu_status = 1;
         }
@@ -73,7 +73,7 @@ class PageController extends Controller
         $mainPage = MainMenu::all();
         return view('Admin.page_details',['mainPage' =>$mainPage]);
     }
-    public function subpagessend(Request $request)
+    public function getsubpage(Request $request)
     {
         $subpage = SubMenu::where('parent_menu_id', $request->mainpage)->get();
 
@@ -123,6 +123,48 @@ class PageController extends Controller
             return back()->with('status', 'successfully added page details');
 
         }
-       
     }
+    public function mainPageStatus($id){
+        
+ 
+        $page = MainMenu::find($id);
+        
+        if($page->status ==1){
+            $page->status = 0;
+        }
+        else{
+            $page->status = 1;
+        }
+        $page->save();
+
+        return back()->with('status', 'successfuly updated page status');
+    }
+    public function subPageStatus($id){
+        
+ 
+        $page = SubMenu::find($id);
+        
+        if($page->status ==1){
+            $page->status = 0;
+        }
+        else{
+            $page->status = 1;
+        }
+        $page->save();
+
+        return back()->with('status', 'successfuly updated page status');
+    }
+
+    public static function getParentPage($parent_id){
+        $mainPage = MainMenu::find($parent_id);
+        return $mainPage->name;
+    }
+
+   public function mainPageInfo($slug){
+
+    $pageInfo = MainMenu::where('slug',$slug)->first();
+    
+    return view('Admin.main_page_info', ['pageInfo' => $pageInfo]);
+
+   }
 }

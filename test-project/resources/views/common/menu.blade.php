@@ -51,20 +51,20 @@
                         <div class="navbar-collapse">
                             <!-- Main Menu -->
                             <ul id="nav" class="nav menu navbar-nav">
-                                <li><a class="active" href="{{ route('index') }}">Home</a></li>
-                                {{-- @foreach (mainPage() as $menu)
-                                    @if($menu->sub_menu >0)
+                            <li><a class="active" href="{{ route('index') }}">Home</a></li>
+                                @foreach (mainPage() as $menu)
+                                   @if($menu->sub_menu_status == 1)
                                         <li><a href="#">{{$menu->name}}<i class="fa fa-angle-down"></i></a>
-                                        <ul class="dropdown">
-                                           @foreach (subMenu($menu->id) as $subMenu)
+                                            <ul class="dropdown">
+                                            @foreach (subMenu($menu->id) as $subMenu)
                                                
-                                           <li><a href="{{route('service-pages', $subMenu->slug)}}">{{$subMenu->name}}</a></li>
-                                           @endforeach
+                                                <li><a href="{{route('service-pages', $subMenu->slug)}}">{{$subMenu->name}}</a></li>
+                                            @endforeach
                                         </ul>
                                     @else
                                     <li class=""><a href="{{route('service-pages', $menu->slug)}}">{{$menu->name}}</a></li>
                                     @endif
-                                @endforeach --}}
+                                @endforeach
                                
                             </ul>
                             <!-- End Main Menu -->

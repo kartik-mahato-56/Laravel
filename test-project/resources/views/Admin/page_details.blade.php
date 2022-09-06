@@ -8,7 +8,7 @@
         $('#mainpage_id').on('change', function(e) {
             var mainpage_id = e.target.value;
             $.ajax({
-                url: "{{ route('subpagessend') }}",
+                url: "{{ route('getsubpage') }}",
                 type: "GET",
                 data: {
                     mainpage: mainpage_id
@@ -16,10 +16,13 @@
                 success: function(data) {
                  
                         $('#subpage').empty();
+                   
                         $('#subpage').append('<option value="" hidden>Choose Sub menu</option>');
                         $.each(data, function(key, value) {
                             $('#subpage').append('<option value="' + value.id + '">' + value.name + '</option>');
+                            
                         });
+
                 } 
                 
             });
@@ -69,7 +72,7 @@
                     </div>
                     <div class="mb-3">
                       <label for="" class="form-label">Description</label>
-                      <textarea class="form-control" name="description" id="" rows="3"></textarea>
+                      <textarea class="form-control" name="description" id="description" rows="3"></textarea>
                     </div>
                     <div class="mb-3">
                       <label for="" class="form-label">Choose Image</label>
@@ -77,7 +80,7 @@
                       
                     </div>
                     <div class="d-flex justify-content-center">
-                        <button type="submit" class="btn btn-outline-success">add main menu</button>
+                        <button type="submit" class="btn btn-outline-success">Submit Page Details</button>
                     </div>
                   </div>
                 </form>

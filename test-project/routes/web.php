@@ -108,9 +108,13 @@ Route::group(['middleware'=>'admin_auth'],function(){
     Route::post('/new_sub_page', [PageController::class, 'subPageSubmit'])->name('sub_page_submit');
 
     Route::get('/page_details', [PageController::class, 'pageDetails'])->name('page_details');
-    Route::get('/subpagessend', [PageController::class, 'subpagessend'])->name('subpagessend');
+    Route::get('/getsubpage', [PageController::class, 'getsubpage'])->name('getsubpage');
 
     Route::post('/page_details',[ PageController::class, 'pageDetailsSubmit'])->name('page_details_submit');
+    Route::get('/main_page_status/{id}', [PageController::class, 'mainPageStatus'])->name('main_page_status');
+    Route::get('/sub_page_status/{id}', [PageController::class, 'subPageStatus'])->name('sub_page_status');
+
+    Route::get('/main_page_info/{slug}', [PageController::class, 'mainPageInfo'])->name('main_page_info');
     
     
     
