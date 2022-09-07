@@ -109,6 +109,7 @@ Route::group(['middleware'=>'admin_auth'],function(){
 
     Route::get('/page_details', [PageController::class, 'pageDetails'])->name('page_details');
     Route::get('/getsubpage', [PageController::class, 'getsubpage'])->name('getsubpage');
+    Route::get('/getsubpagedetails', [PageController::class, 'getsubpagedetails'])->name('getsubpagedetails');
 
     Route::post('/page_details',[ PageController::class, 'pageDetailsSubmit'])->name('page_details_submit');
     Route::get('/main_page_status/{id}', [PageController::class, 'mainPageStatus'])->name('main_page_status');

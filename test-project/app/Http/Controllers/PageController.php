@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Facade;
 use Illuminate\Support\Facades\DB;
+use PhpParser\Node\Expr\FuncCall;
+
 class PageController extends Controller
 {
     //
@@ -75,10 +77,11 @@ class PageController extends Controller
     }
     public function getsubpage(Request $request)
     {
+        $mainPage = MainMenu::where('id',$request->mainpage)->first();
         $subpage = SubMenu::where('parent_menu_id', $request->mainpage)->get();
 
 
-        return response()->json($subpage);
+        return response()->json(['subpage' => $subpage, 'mainPage' => $mainPage]);
     }
 
     public function pageDetailsSubmit(Request $request){
@@ -166,5 +169,11 @@ class PageController extends Controller
     
     return view('Admin.main_page_info', ['pageInfo' => $pageInfo]);
 
+   }
+
+   public function getsubpagedetails(Request $request){
+        $subPageDetails = SubMenu::where('id',$request->subpage_id)->first();
+
+        return response()->json(['subPageDeatils' => $subPageDetails]);
    }
 }
