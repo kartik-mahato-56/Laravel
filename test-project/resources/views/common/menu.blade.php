@@ -53,7 +53,7 @@
                             <ul id="nav" class="nav menu navbar-nav">
                             <li><a class="active" href="{{ route('index') }}">Home</a></li>
                                 @foreach (mainPage() as $menu)
-                                   @if($menu->sub_menu_status == 1)
+                                   @if($menu->sub_menu == 1)
                                         <li><a href="#">{{$menu->name}}<i class="fa fa-angle-down"></i></a>
                                             <ul class="dropdown">
                                             @foreach (subMenu($menu->id) as $subMenu)

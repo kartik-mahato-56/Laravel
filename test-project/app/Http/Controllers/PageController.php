@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\MainMenu;
+use App\Models\PageImage;
 use App\Models\SubMenu;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -77,55 +78,110 @@ class PageController extends Controller
     }
     public function getsubpage(Request $request)
     {
-        $mainPage = MainMenu::where('id',$request->mainpage)->first();
-        $subpage = SubMenu::where('parent_menu_id', $request->mainpage)->get();
+        $mainPage = MainMenu::where('id',$request->mainPageId)->first();
+        $subpage = SubMenu::where('parent_menu_id', $request->mainPageId)->get();
+
+        $pageImage = PageImage::where('page_slug', $mainPage->slug)->first();
 
 
-        return response()->json(['subpage' => $subpage, 'mainPage' => $mainPage]);
+        return response()->json(['subpage' => $subpage, 'mainPage' => $mainPage, 'pageImage' => $pageImage]);
     }
 
+    // edit page detauils or enter new page detais here
     public function pageDetailsSubmit(Request $request){
         
-        if($request->parent_page_id != "" && $request->sub_page_id == ""){
-            $pageDetails = MainMenu::where('id',$request->parent_page_id)->first();
-            $pageDetails->description  = $request->description;
+                // updating mainpage or enter new details to a new main page
+        if($request->subPageId == ""){
+            $pageDetails = MainMenu::find($request->mainPageId);
+            $pageDetails->description =$request->description;
+            if($request->imageIndex !=""){
+                $request->validate([
+                    'images' => "required"
+                ]);
 
-            if($request->hasFile('images')){
-                foreach ($request->file('images') as  $value) {
+                if(sizeof($request->imageIndex) == sizeof($request->images)){
+                    $pageImage = PageImage::where('page_slug', $pageDetails->slug)->first();
+                    $images = explode(',', $pageImage->images);
+                    foreach($request->file('images') as $key=>$value){
+                        unlink('Gallery/'.$images[$key]);
+                        $file_type = $value->extension();
+                        $filename = uniqid().'.'.$file_type;
+                        $value->move(public_path('Gallery/'),$filename);
+                        $images[$key] = $filename;
+                    }
+                    $pageImage->images = implode(',',$images);
+                    $pageImage->save();
+                }
+            }
+            else if($request->hasFile('images')){
+                $image = new PageImage();
+
+                foreach($request->file('images') as  $value) {
                     $file_type =$value->extension();
                     $filename = uniqid().".".$file_type;
                     $value->move(public_path('Gallery/'),$filename);
-                    $galley_image[] = $filename;
+
+                    $pageImage[] = $filename; 
                 }
-                $pageDetails->images =  implode(',',$galley_image);
+                if($image->images == "" ){
+                    $image->images = implode(',',$pageImage);
+                }else{
+                    $image->images .= ','. implode(',', $pageImage);
+                }
+                
+                $image->page_slug = $pageDetails->slug;
+                $image->save();
             }
 
             $pageDetails->save();
-            return back()->with('status', 'successfully added page details');
-
+            return redirect('/main_page_list')->with('status', 'successfully updated page details');
         }
-        
-        
-        else if($request->parent_page_id != "" && $request->sub_page_id != ""){
-            $pageDetails = SubMenu::where('id',$request->sub_page_id)->first();
-            $pageDetails->description  = $request->description;
-
-            if($request->hasFile('images')){
-                foreach ($request->file('images') as  $value) {
-                    $file_type =$value->extension();
-                    $filename = uniqid().".".$file_type;
-                    $value->move(public_path('Gallery/'),$filename);
-                    $galley_image[] = $filename;
-                }
-                $pageDetails->images =  implode(',',$galley_image);
-            }
+        else{
             
+            $pageDetails =SubMenu::find($request->subPageId);
+            $pageDetails->description =$request->description;
+            if($request->imageIndex !=""){
+                $request->validate([
+                    'images' => "required"
+                ]);
+
+                if(sizeof($request->imageIndex) == sizeof($request->images)){
+                    $pageImage = PageImage::where('page_slug', $pageDetails->slug)->first();
+                    $images = explode(',', $pageImage->images);
+                    foreach($request->file('images') as $key=>$value){
+                        unlink('Gallery/'.$images[$key]);
+                        $file_type = $value->extension();
+                        $filename = uniqid().'.'.$file_type;
+                        $value->move(public_path('Gallery/'),$filename);
+                        $images[$key] = $filename;
+                    }
+                    $pageImage->images = implode(',',$images);
+                    $pageImage->save();
+                }
+            }
+            else if($request->hasFile('images')){
+                $image = new PageImage();
+                foreach($request->file('images') as  $value) {
+                    $file_type =$value->extension();
+                    $filename = uniqid().".".$file_type;
+                    $value->move(public_path('Gallery/'),$filename);
+
+                    $pageImage[] = $filename;   
+                }
+                if($image->images == "" ){
+                    $image->images = implode(',',$pageImage);
+                }else{
+                    $image->images .= ','. implode(',', $pageImage);
+                }
+               
+                $image->page_slug = $pageDetails->slug;
+                $image->save();
+            }
+
             $pageDetails->save();
-
-          
-            return back()->with('status', 'successfully added page details');
-
+            return redirect('/sub_page_list')->with('status', 'successfully updated page details'); 
         }
+      
     }
     public function mainPageStatus($id){
         
@@ -163,17 +219,26 @@ class PageController extends Controller
         return $mainPage->name;
     }
 
-   public function mainPageInfo($slug){
+    public function mainPageInfo($slug){
 
-    $pageInfo = MainMenu::where('slug',$slug)->first();
-    
-    return view('Admin.main_page_info', ['pageInfo' => $pageInfo]);
+        $pageInfo = MainMenu::where('slug',$slug)->first();
+        $pageImage = PageImage::where('page_slug', $slug)->first();
+        return view('Admin.main_page_info', ['pageInfo' => $pageInfo,'pageImage' => $pageImage]);
 
-   }
+    }
 
-   public function getsubpagedetails(Request $request){
-        $subPageDetails = SubMenu::where('id',$request->subpage_id)->first();
+//    sub page info showing function
+    public function subPageInfo($slug){
+        $pageInfo = SubMenu::where('slug',$slug)->first();
+        $pageImage = PageImage::where('page_slug', $slug)->first();
+        return view('Admin.sub_page_info', ['pageInfo' => $pageInfo,'pageImage'=>$pageImage]);
+    }
 
-        return response()->json(['subPageDeatils' => $subPageDetails]);
-   }
+    public function getsubpagedetails(Request $request){
+        $subPageDetails = SubMenu::where('id',$request->subpage_Id)->first();
+        $pageImage = PageImage::where('page_slug', $subPageDetails->slug)->first();
+        return response()->json(['subPageDeatils' => $subPageDetails, 'pageImage' => $pageImage]);
+    }
+
+  
 }

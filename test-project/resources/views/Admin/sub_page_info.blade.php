@@ -28,25 +28,17 @@
                     <div class="login-form">
                         <h4 class="text-center">Page Info</h4>
                         <div class="mb-3">
-                          <label for="" class="form-label">Page Name</label>
+                          <label for="" class="form-label">Main page name</label>
                           <input type="text"
-                            class="form-control" name="" id="" value="{{$pageInfo->name}}">
+                            class="form-control" name="" id="" value="{{App\Http\Controllers\PageController::getParentPage($pageInfo->parent_menu_id)}}" readonly>
                          
                         </div>
-                        @if($pageInfo->sub_menu_status != 0)
-                            <div class="mb-3">
-                              <label for="" class="form-label">Sub Pages</label>
-                              <select class="form-control" name="" id="">
-                                @foreach (subMenu($pageInfo->id) as $subPage)
-                                <option>{{$subPage->name}}</option> 
-                                @endforeach
-                                
-                              </select>
-                            </div>
-                        @else
-                        <label for="" class="form-label">Sub Pages</label>
-                        <input class="form-control" type="text" placeholder="No Sub Pages" disabled>
-                        @endif
+                        <div class="mb-3">
+                          <label for="" class="form-label">Page Name</label>
+                          <input type="text"
+                            class="form-control" name="" id="" aria-describedby="helpId" placeholder="" value="{{$pageInfo->name}}" readonly>
+                         
+                        </div>
 
                         <div class="mb-3">
                           <label for="" class="form-label">Description</label>
@@ -54,7 +46,6 @@
                         </div>
                         <div class="mb-3">
                           <label for="" class="form-label">Images</label><br>
-                      
                           @if($pageImage->images != "")
                             @foreach (explode(',',$pageImage->images) as $image)
                             <img  src="{{asset('Gallery/'.$image)}}" width="200px" height="200px" alt="">&nbsp;&nbsp;
@@ -65,7 +56,7 @@
                           @endif
                         </div>
                         <div class="d-flex justify-content-center">
-                            <a href="{{route('main_page_list')}}" role="button" class="btn btn-primary d-grid gap-2 col-6 mx-auto">Back</a>
+                            <a href="{{route('sub_page_list')}}" class="btn btn-primary">Back</a>
                         </div>
                     </div>
                 </div>

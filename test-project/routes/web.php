@@ -16,7 +16,7 @@ use App\Models\FeaturedProduct;
 |--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
-|
+|  
 | Here is where you can register web routes for your application. These
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
@@ -51,7 +51,6 @@ Route::post('/dashboard', [AdminController::class, 'login'])->name('login');
 
 Route::get('/register',[AdminController::class, 'register'])->name('register');
 Route::post('/signed_up', [AdminController::class, 'store'])->name('signed_up');
-
 // dashboard route
 // forget password route
 Route::get('/forget_password',[AdminController::class,'forgetPassword'])->name('forget-pass');
@@ -62,16 +61,13 @@ Route::get('/otp_verification', [AdminController::class, 'otp_verification'])->n
 // admin pannel routes:all this route will work after admin login
 Route::group(['middleware'=>'admin_auth'],function(){
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
-
     Route::get('/account',[AdminController::class, 'account'])->name('account');
-   
 
     // route for update
     Route::post('/update',[AdminController::class, 'update_details'])->name('update');
 
     Route::get('/change_password', [AdminController::class, 'loadChangePassword'])->name('change_password_get');
     Route::post('/change_password', [AdminController::class, 'changePassword'])->name('change_password_post');
-
 
     // banners routes
     Route::get('/banner', [BannerController::class, 'index'])->name('banner');
@@ -101,11 +97,13 @@ Route::group(['middleware'=>'admin_auth'],function(){
     Route::get('/main_page_list', [PageController::class, 'listMainPage'])->name('main_page_list');
     Route::get('/new_main_page', [PageController::class, 'newMainPage'])->name('new_main_page');
     Route::post('/new_main_page', [PageController::class, 'newMainPageSubmit'])->name('new_main_page_submit');
+    Route::get('/main_page_info/{slug}', [PageController::class, 'mainPageInfo'])->name('main_page_info');
     
     
     Route::get('/sub_page_list', [PageController::class, 'listSubPages'])->name('sub_page_list');
     Route::get('/new_sub_page', [PageController::class, 'newSubPage'])->name('new_sub_page');
     Route::post('/new_sub_page', [PageController::class, 'subPageSubmit'])->name('sub_page_submit');
+    Route::get('/sub_page_info/{slug}', [PageController::class, 'subPageInfo'])->name('sub_page_info');
 
     Route::get('/page_details', [PageController::class, 'pageDetails'])->name('page_details');
     Route::get('/getsubpage', [PageController::class, 'getsubpage'])->name('getsubpage');

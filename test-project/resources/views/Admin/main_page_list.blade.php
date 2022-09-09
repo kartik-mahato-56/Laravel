@@ -65,13 +65,9 @@
                                                 @endif  
                                             </td>
                                             <td>
-                                                <a href="{{route('main_page_info',$page->slug)}}" class="btn btn-outline-success" role="button" data-toggle="tooltip" data-placement="top" title="click show info" >
+                                                <a href="{{route('main_page_info',$page->slug)}}" class="btn btn-outline-success" role="button" data-toggle="tooltip" data-placement="top" title="click to show info" >
                                                     <i class="fa fa-info-circle" aria-hidden="true"></i>
                                                 </a>&nbsp;&nbsp;
-                                                <a href="" class="btn btn-outline-danger btn-sm" role="button">
-                                                    <i class="fa fa-trash" aria-hidden="true"></i>
-    
-                                                </a>
                                             </td>
                                         </tr>
                                     @endforeach

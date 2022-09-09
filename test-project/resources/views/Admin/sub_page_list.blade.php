@@ -49,7 +49,7 @@
                                      <th scope="col">Page Name</th>
                                      <th scope="col">Main Page Name</th>
                                      <th scope="col">status</th>
-                                     <th>Action</th>
+                                     <th scope="col">Action</th>
                                      
                                  </tr>
                                  </thead>
@@ -70,12 +70,10 @@
                                                 @endif  
                                             </td>
                                             <td>
-                                                <a href=""  type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#mediumModal">
+                                                <a href="{{route('sub_page_info', $page->slug)}}"  type="button" class="btn btn-outline-success" data-toggle="tooltip" data-placement="top" title="click to show info">
                                                     <i class="fa fa-info-circle" aria-hidden="true"></i>
                                                 </a>&nbsp;&nbsp;
-                                                <a href="" class="btn btn-outline-danger" role="button"  onclick="confirm('Are you sure want to delete?')">
-                                                    <i class="fa fa-trash" aria-hidden="true"></i>
-                                                </a>
+  
                                             </td>
                                         </tr>
                                     @endforeach

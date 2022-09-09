@@ -31,13 +31,13 @@
             
         <div class="col-12">
             <div class="demo-gallery">
-                @if($pageData->images)
+                @if($pageImage)
               
                 <ul id="lightgallery" class="list-unstyled row">
-                    @foreach (explode(',',$pageData->images) as $imageData)
-                    <li class="col-12 col-sm-4 col-md-4 col-lg-4" data-responsive="{{asset('Gallery/'.$imageData)}}" data-src="{{asset('Gallery/'.$imageData)}}" >
+                    @foreach (explode(',',$pageImage->images) as $image)
+                    <li class="col-12 col-sm-4 col-md-4 col-lg-4" data-responsive="{{asset('Gallery/'.$image)}}" data-src="{{asset('Gallery/'.$image)}}" >
                         <a href="">
-                            <img class="img-responsive" src="{{asset('Gallery/'.$imageData)}}">    
+                            <img class="img-responsive" src="{{asset('Gallery/'.$image)}}">    
                         </a>
                     </li>
                     @endforeach

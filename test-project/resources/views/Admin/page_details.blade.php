@@ -5,44 +5,52 @@
 <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function() {
-      $('#mainpage_id').on('change', function(e) {
+      $('#mainpage').on('change', function(e) {
         var mainpage_id = e.target.value;
         $.ajax({
           url: "{{route('getsubpage')}}",
           type: "GET",
           data: {
-            mainpage: mainpage_id
+            mainPageId: mainpage_id
           }, 
 
           success: function(data) {
-
-            if (data.mainPage.sub_menu_status == 0) {
-              $('#subpagediv').css({
-                display: "none",
-                visibility: "hidden"
-              });
-              $('#description').empty();
+            $('#pageImage').empty();
+            $('#description').empty();
+            if(data.mainPage.sub_menu == 0){
               $('#description').append(data.mainPage.description);
-              $('#pageImage').empty();
-              $.each(data.mainPage.images.split(','), function(key, value) {
+            }
 
-                let pageImage = "Gallery/" + value;
-                $('#pageImage').append('<img src="{{ asset('') }}' +pageImage +'" hight="200px" width="200px"/>&nbsp;&nbsp');
-              });
-
-            } 
-            else {
+            if(data.pageImage){
+              $('.image-section').css({
+                  display: "grid",
+                  visibility: "visible"
+                });
+              
+                $('#pageImage').empty();
+                $.each(data.pageImage.images.split(','), function(key, value) {
+                
+                  let pageImage = "Gallery/" + value;
+                  $('#pageImage').append('<label for="'+key+'" class="imgfocus"><img src="{{ asset('') }}' +pageImage +'" hight="200px" width="200px" value="'+key+'" class="imagediv" tabindex="1" /></label><input type="checkbox" class="imgcheckbox" name="imageIndex[]" multiple value="'+key+'" id="'+key+'">&nbsp;&nbsp');
+                
+                });
+            }
+            
+            if (data.mainPage.sub_menu > 0) {
               $('#subpagediv').css({
                 display: "grid",
                 visibility: "visible"
               });
-              $('#subpage').empty();             
+              $('#subpage').empty();    
+              $         
               $('#subpage').append('<option value="" hidden>Choose Sub menu</option>');
               $.each(data.subpage, function(key, value) {
                 $('#subpage').append('<option value="' + value.id +'">' + value.name + '</option>');
               });
             }
+            
           }
+          
         });
       });
       $('#subpage').on('change', function(e){
@@ -51,17 +59,26 @@
           url: "{{route('getsubpagedetails')}}",
           type: "GET",
           data:{
-            subpage_id: subPageId
+            subpage_Id: subPageId
           },
           success:function(data){
+    
             $('#description').empty();
             $('#description').append(data.subPageDeatils.description);
             $('#pageImage').empty();
-            if(data.subPageDeatils.images != ""){
-              $.each(data.subPageDeatils.images.split(','), function(key, value) {
-                let pageImage = "Gallery/" + value;
-                $('#pageImage').append('<img src="{{ asset('') }}' +pageImage +'" value="'+key+'" hight="200px" width="200px"/>&nbsp;&nbsp');
-              });
+            if(data.pageImage){
+              $('.image-section').css({
+                  display: "grid",
+                  visibility: "visible"
+                });
+              
+                $('#pageImage').empty();
+                $.each(data.pageImage.images.split(','), function(key, value) {
+                
+                  let pageImage = "Gallery/" + value;
+                  $('#pageImage').append('<label for="'+key+'" class="imgfocus"><img src="{{ asset('') }}' +pageImage +'" hight="200px" width="200px" value="'+key+'" class="imagediv" tabindex="1" /></label><input type="checkbox" class="imgcheckbox" name="imageIndex[]" multiple value="'+key+'" id="'+key+'">&nbsp;&nbsp');
+                
+                });
             }
           }
         });
@@ -73,6 +90,22 @@
         display: none;
         visibility: hidden;
     }
+    /* .imagediv:focus{
+      border: 4px solid rgb(3, 67, 104);
+      cursor: pointer;
+    } */
+    .image-section:focus{
+      border: 4px solid rgb(3, 67, 104);
+      cursor: pointer;
+    }
+    .image-section{
+      display: none;
+      visibility: hidden;
+    }
+    .imagediv:focus{
+      border:5px solid blue;
+    }
+
 </style>
 
 <body class="animsition">
@@ -103,7 +136,7 @@
                                 <h3 class="text-center">Page Details</h3>
                                 <div class="mb-3">
                                     <label for="" class="form-label">Select Main Page</label>
-                                    <select class="form-control" name="parent_page_id" id="mainpage_id">
+                                    <select class="form-control" name="mainPageId" id="mainpage">
                                         <option value="">-- select --</option>
                                         @foreach ($mainPage as $page)
                                             <option value="{{ $page->id }}">{{ $page->name }}</option>
@@ -112,7 +145,7 @@
                                 </div>
                                 <div class="mb-3" id="subpagediv">
                                     <label for="" class="form-label">Select Sub Page</label>
-                                    <select class="form-control" name="sub_page_id" id="subpage">
+                                    <select class="form-control" name="subPageId" id="subpage">
 
                                     </select>
                                 </div>
@@ -120,16 +153,19 @@
                                     <label for="" class="form-label">Description</label>
                                     <textarea class="form-control" name="description" id="description" rows="3"></textarea>
                                 </div>
-                                <div class="mb-3">
+                                <div class="image-section">
+                                  <div class="mb-3">
                                     <label for="" class="form-label">Images</label><br>
-                                    <label src="" class="form-label imagediv" alt="" id="pageImage"></label>
+                                    <div class="image-index" tabindex="1">
+                                      <label src="" class="form-label" tabindex="1" alt="" id="pageImage"></label>
+                                    </div>
+                                  </div>
                                 </div>
-                                <div class="mb-3">
-                                    <label for="" class="form-label">Choose Image</label>
-                                    <input type="file" class="form-control" name="images[]" multiple id=""
-                                        placeholder="" aria-describedby="fileHelpId">
-
+                                <div class="new-image-div" id="new-image-div">
+                                  <label for="newImage" class="form-label btn btn-success btn-sm" role="button">Upload Image</label>
+                                  <input type="file" name="images[]" multiple id="newImage" hidden>
                                 </div>
+                              
                                 <div class="d-flex justify-content-center">
                                     <button type="submit" class="btn btn-outline-success">Submit Page Details</button>
                                 </div>

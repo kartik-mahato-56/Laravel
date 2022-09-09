@@ -39,13 +39,6 @@ class AdminController extends Controller
     {
         //
     }
-
-    public function image(){
-        echo "helo";
-        die;
-        // return view('Admin.image');
-    }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -145,9 +138,6 @@ class AdminController extends Controller
         $banner = Banner::where('status','=',1)->count();
         $product = FeaturedProduct::where('status','=',1)->count();
         $enquiry = Enquiry::where('status','=',0)->count();
-        
-        
-
         return view('Admin.dashboard',['banner'=>$banner,'enquiry'=>$enquiry,'product'=>$product]);
     }
     public function forgetPassword(){
@@ -188,8 +178,8 @@ class AdminController extends Controller
                 if($user->profile_pic != null){
                     unlink($image_path.$user->profile_pic);
                 }
-                    $request->file('profile_pic')->move(public_path('users/'), time() . '.' . $file_type);
-                    $user->profile_pic = $filename;
+                $request->file('profile_pic')->move(public_path('users/'), time() . '.' . $file_type);
+                $user->profile_pic = $filename;
 
             }
             $user->username = $request->username;
@@ -339,16 +329,7 @@ class AdminController extends Controller
             $enquiries = Enquiry::where('status',$request->status)->get();
             return view('Admin.enquiries',['enquiries'=>$enquiries]);
         }
-        // else if($request->status != "" && ($request->fromdate != "" && $request->todate != "")){
-        //     $request->validate([
-        //         'fromdate' => "required|date",
-        //         "todate" => "required|date|after:fromdate"
-        //     ]);
-        
-        //     $enquiries = Enquiry::where('status',$request->status)->get();
-        //     $enquiries = $enquiries->whereBetween('created_at',[$request->fromdate, $request->todate])->get();
-        //     return view('Admin.enquiries',['enquiries'=>$enquiries]);
-        // }
+       
         else if($request->fromdate != "" && $request->todate != ""){
             $request->validate([
                 'fromdate' => "required|date",
@@ -378,91 +359,5 @@ class AdminController extends Controller
         $enquiry->delete();
 
         return redirect('/enquiries')->with('message', 'enquiry delete successfully');
-    }
-
-
-    // function for pages
-    public function newMainMenu(){
-
-        return view('Admin.new_main_menu');
-    }
-
-    public function newManinMenuSubmit(Request $request){
-        $request->validate([
-            'name' => 'required|unique:main_menus'
-        ]);
-        $newMainMenu = new MainMenu();
-
-        $newMainMenu->name =$request->name;
-        $newMainMenu->slug = Str::slug($request->name,'_');
-        $newMainMenu->description = $request->description;
-
-        if($request->hasfile('image'))
-        {
-          foreach ($request->file('image') as  $value) {
-              $file_type =$value->extension();
-              $filename = uniqid().".".$file_type;
-              $value->move(public_path('Gallery/'),$filename);
-              $galley_image[] = $filename;
-          }
-          $newMainMenu->images =  implode(',',$galley_image);
-          
-        }
-
-        $newMainMenu->save();
-        return back()->with('status', "Successfully added main menu");
-
-    }
-
-
-    public function newSubMenu(){
-        $parentMenu = MainMenu::where('status',1)->get();
-
-        return view('Admin.new_sub_menu', ['parentMenu' => $parentMenu]);
-    }
-
-    public function newSubMenuSubmit(Request $request){
-        $request->validate([
-            'name' => 'required|unique:sub_menus'
-        ]);
-
-        $subMenu = new SubMenu();
-        $subMenu->name = $request->name;
-        $subMenu->slug = Str::slug($request->name,'_');
-        $subMenu->parent_menu_id = $request->parent_id;
-        $subMenu->description = $request->description;
-        if($request->hasfile('image'))
-        {
-          foreach ($request->file('image') as  $value) {
-              $file_type =$value->extension();
-              $filename = uniqid().".".$file_type;
-              $value->move(public_path('Gallery/'),$filename);
-              $galley_image[] = $filename;
-          }
-          $subMenu->images =  implode(',',$galley_image);
-          
-        }
-        $subMenu->save();
-
-        // updating in main_menus table
-        $mainMenu = MainMenu::find($request->parent_id);
-        if($mainMenu->sub_menu == 0){
-            $mainMenu->sub_menu = 1;
-        }
-        else{
-            $mainMenu->sub_menu += 1;
-
-        }
-       
-        $mainMenu->save();
-
-        return back()->with('status', 'successfully addedd sub menu');
-
-    }
-
-    public function loadPageList(){
-
-        $pages = MainMenu::where('status',1)->get();
-        return view('Admin.page_list',['pages'=>$pages]);
     }
 }

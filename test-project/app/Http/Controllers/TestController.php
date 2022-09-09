@@ -13,6 +13,7 @@ use App\Models\Test;
 use Illuminate\Http\Request;
 use Psy\CodeCleaner\FunctionReturnInWriteContextPass;
 use App\Models\Page;
+use App\Models\PageImage;
 use App\Models\SubMenu;
 use Illuminate\Support\Facades\DB;
 
@@ -79,14 +80,17 @@ class TestController extends Controller
     public function pageLoad($slug){
 
         $pageData = MainMenu::where('slug',$slug)->first();
+        $pageImage = PageImage::where('page_slug', $slug)->first();
+       
         
         if(!$pageData){
             $pageData = SubMenu::where('slug', $slug)->first();
             
-            return view('default_page', ['pageData' => $pageData]);
+            
+            return view('default_page', ['pageData' => $pageData, 'pageImage' => $pageImage]);
         }
         else{
-            return view('default_page', ['pageData' => $pageData]);
+            return view('default_page', ['pageData' => $pageData, 'pageImage' => $pageImage]);
             
         }
             
@@ -114,6 +118,10 @@ class TestController extends Controller
     public function destroy(Test $test)
     {
         //
+    }
+
+    public function contact(){
+        return view('contact');
     }
 
 }
