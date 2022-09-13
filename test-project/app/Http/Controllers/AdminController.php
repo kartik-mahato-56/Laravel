@@ -8,6 +8,8 @@ use App\Models\Enquiry;
 use App\Models\FeaturedProduct;
 use App\Models\Image;
 use App\Models\MainMenu;
+use App\Models\CommunicationData;
+use App\Models\CommunicatonDetail;
 use App\Models\SubMenu;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -359,5 +361,12 @@ class AdminController extends Controller
         $enquiry->delete();
 
         return redirect('/enquiries')->with('message', 'enquiry delete successfully');
+    }
+
+    public function communicationDetails(){
+        
+        $communications = CommunicatonDetail::with('admin', 'user')->get();
+
+       return view('admin.communications',['communications'=>$communications]);
     }
 }

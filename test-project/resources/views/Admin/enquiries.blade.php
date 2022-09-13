@@ -93,7 +93,7 @@
                                                         <a href="{{route('delete_enquiry', $enquiry->id)}}" role="button" class="btn btn-outline-danger"><i class="fa fa-trash" aria-hidden="true"></i></a>
                                                     @endif
                                             
-                                                </td>
+                                                </td>s
                                             </tr>
                                         @endforeach
                                     </tbody>
@@ -118,5 +118,6 @@
         window.history.replaceState( null, null, window.location.href );
     }
 </script>
+
 <script src="//cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
 <link rel="stylesheet" href="//cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">

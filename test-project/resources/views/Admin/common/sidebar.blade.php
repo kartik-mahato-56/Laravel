@@ -56,6 +56,11 @@
                         
                     </ul>
                 </li> 
+                <li class="has-sub">
+                    <a class="js-arrow" href="{{route('communication_details')}}">
+                        <i class="fa fa-commenting" aria-hidden="true"></i>Communications
+                    </a>
+                </li>
             </ul>
         </nav>
     </div>

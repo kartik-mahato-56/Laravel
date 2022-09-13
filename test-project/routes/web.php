@@ -115,7 +115,8 @@ Route::group(['middleware'=>'admin_auth'],function(){
 
     Route::get('/main_page_info/{slug}', [PageController::class, 'mainPageInfo'])->name('main_page_info');
     
-    
+    // relationship between admins table and communication_data table
+    Route::get('/communication_details',[AdminController::class, 'communicationDetails'])->name('communication_details');
     
     // Enquiry Routes
     Route::get('/enquiries',[AdminController::class,'enquiries'])->name('enquiries');
@@ -133,27 +134,3 @@ Route::group(['middleware'=>'admin_auth'],function(){
     // logout route
     Route::get('/logout',[AdminController::class, 'logout'])->name('logout');
 });
-
-/*
-
-DB::table('allergies')->insert(array(
-    0 =>
-    array(
-        'id'=>1,
-        'allergy' => 'Drug Allergy',
-        'status'=>1
-    ),
-    1 =>
-    array(
-        'id'=>2,
-        'allergy' => 'Food Allergy',
-        'status'=>1
-    ),
-    2 =>
-    array(
-        'id'=>3,
-        'allergy' => 'Insect Allergy',
-        'status'=>1
-    ),
-
-    */

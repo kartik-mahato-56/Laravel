@@ -15,8 +15,8 @@ class CommunicationSeeder extends Seeder
     public function run()
     {
         //
-        DB::table('communication_data')->delete();
-        DB::table('communication_data')->insert([
+        DB::table('communicaton_details')->delete();
+        DB::table('communicaton_details')->insert([
             0=>[
                 'id'=>1,
                 'admin_id'=>1,
