@@ -40,6 +40,7 @@ Notes:	decreasing heading by 0.4em with every subsequent heading level
 /*                   GENERIC                           */
 /*-----------------------------------------------------*/
 /* ----- Normalize ----- */
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
 * {
     margin: 0;
     padding: 0;
@@ -99,9 +100,10 @@ p {
 
 /* ----- Typography ----- */
 body {
-    font-family: "Poppins", sans-serif;
+    font-family: 'Lato', sans-serif;
+    font-family: 'Source Sans Pro', sans-serif;
     font-weight: 400;
-    font-size: 16px;
+    font-size: 18px;
     line-height: 1.625;
     color: #666;
     -webkit-font-smoothing: antialiased;
@@ -4675,7 +4677,7 @@ section {
 }
 
 .table-data3 thead tr th {
-    font-size: 16px;
+    font-size: 18px;
     color: black;
     font-weight: 400;
     text-transform: capitalize;
@@ -4725,7 +4727,7 @@ section {
 .table-data3 tbody td {
     border-bottom: 1px solid #f5f5f5;
     background: #fff;
-    font-size: 14px;
+    font-size: 18px;
     color: #808080;
     padding: 12px 40px;
     padding-right: 10px;

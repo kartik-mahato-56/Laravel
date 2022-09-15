@@ -322,4 +322,8 @@ class PageController extends Controller
         $subpage = SubMenu::onlyTrashed()->get();
         return view('Admin.sub_page_trash',['subPages'=>$subpage]);
     }
+    public function restoresSubPage($slug){
+        $restorePage = SubMenu::withTrashed()->where('slug', $slug)->restore();
+        return redirect('/sub_page_list')->with('status', 'successfully restored');
+    }
 }

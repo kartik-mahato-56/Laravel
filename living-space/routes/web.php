@@ -117,6 +117,7 @@ Route::group(['middleware'=>'admin_auth'],function(){
 
     Route::get('/main_page_info/{slug}', [PageController::class, 'mainPageInfo'])->name('main_page_info');
     Route::get('/page_delete/{slug}', [PageController::class,'pageDelete'])->name('page_delete');
+    Route::get('/restore_sub_page/{slug}', [PageController::class, 'restoresSubPage'])->name('restore_sub_page');
     
     // relationship between admins table and communication_data table
     Route::get('/communication_details',[AdminController::class, 'communicationDetails'])->name('communication_details');

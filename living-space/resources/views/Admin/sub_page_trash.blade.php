@@ -70,7 +70,7 @@
                                                 @endif  
                                             </td>
                                             <td>
-                                                <a href="{{route('restore')}}"  type="button" class="btn btn-outline-success" data-toggle="tooltip" data-placement="top" title="click to restore">
+                                                <a href="{{route('restore_sub_page',$page->slug)}}"  type="button" class="btn btn-outline-success" data-toggle="tooltip" data-placement="top" title="click to restore">
                                                     <i class="fa fa-undo" aria-hidden="true"></i>
                                                 </a>&nbsp;&nbsp;
                                                 <a href="" class="btn btn-outline-danger" role="button" data-toggle="tooltip" data-placement="top" title="click to permanent delete" >
