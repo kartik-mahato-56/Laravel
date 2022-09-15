@@ -296,5 +296,30 @@ class PageController extends Controller
         return response()->json(['subPageDeatils' => $subPageDetails, 'pageImage' => $pageImage]);
     }
 
+    public function pageDelete($slug){
+        $page = MainMenu::where('slug', $slug)->first();
 
+        if(is_null($page)){
+            $page = SubMenu::where('slug', $slug)->first();
+            if($page->status == 1){
+                $page->status = 0;
+            }
+            $page->delete();
+            return back()->with('status', 'successfully moved to the trash');
+        }
+        else{
+            if($page->status == 1){
+                $page->status = 0;
+            }
+            $page->delete();
+            return back()->with('status', 'successfully moved to the trash');
+
+        }
+    }
+
+
+    public function subPageTrash(){
+        $subpage = SubMenu::onlyTrashed()->get();
+        return view('Admin.sub_page_trash',['subPages'=>$subpage]);
+    }
 }

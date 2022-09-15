@@ -73,10 +73,19 @@
                                                 <a href="{{route('sub_page_info', $page->slug)}}"  type="button" class="btn btn-outline-success" data-toggle="tooltip" data-placement="top" title="click to show info">
                                                     <i class="fa fa-info-circle" aria-hidden="true"></i>
                                                 </a>&nbsp;&nbsp;
+                                                <a href="{{route('page_delete', $page->slug)}}" class="btn btn-outline-danger" role="button" data-toggle="tooltip" data-placement="top" title="move to trash" >
+                                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                                </a>&nbsp;&nbsp;
   
                                             </td>
+                                            
                                         </tr>
-                                    @endforeach
+                                        @endforeach
+                                        <tr>
+                                            <td colspan="5" align="right">
+                                                <a href="{{route('sub_page_trash')}}" role="button" class="btn btn-outline-secondary">Go To Trash</a>
+                                            </td>
+                                        </tr>
                                    
                                 </tbody>
                             </table>

@@ -11,6 +11,7 @@ use App\Http\Middleware\AdminMiddleware;
 use App\Models\Admin;
 use App\Models\Banner;
 use App\Models\FeaturedProduct;
+use App\Models\PageImage;
 
 /*
 |--------------------------------------------------------------------------
@@ -104,6 +105,7 @@ Route::group(['middleware'=>'admin_auth'],function(){
     Route::get('/new_sub_page', [PageController::class, 'newSubPage'])->name('new_sub_page');
     Route::post('/new_sub_page', [PageController::class, 'subPageSubmit'])->name('sub_page_submit');
     Route::get('/sub_page_info/{slug}', [PageController::class, 'subPageInfo'])->name('sub_page_info');
+    Route::get('/sub_page_trash', [PageController::class, 'subPageTrash'])->name('sub_page_trash');
 
     Route::get('/page_details', [PageController::class, 'pageDetails'])->name('page_details');
     Route::get('/getsubpage', [PageController::class, 'getsubpage'])->name('getsubpage');
@@ -114,6 +116,7 @@ Route::group(['middleware'=>'admin_auth'],function(){
     Route::get('/sub_page_status/{id}', [PageController::class, 'subPageStatus'])->name('sub_page_status');
 
     Route::get('/main_page_info/{slug}', [PageController::class, 'mainPageInfo'])->name('main_page_info');
+    Route::get('/page_delete/{slug}', [PageController::class,'pageDelete'])->name('page_delete');
     
     // relationship between admins table and communication_data table
     Route::get('/communication_details',[AdminController::class, 'communicationDetails'])->name('communication_details');

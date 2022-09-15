@@ -35,13 +35,13 @@ class UserController extends Controller
 
     public function searchData(Request $request){
         $user = User::where('email', $request->email)->first();
-        return ['result'=>$user];
-        // if($user){
-        //     return ['result'=>$user];
-        // }
+       
+        if(!is_null($user)){
+            return ['result'=>$user];
+        }
 
-        // ele{
-        //     return ['result'=>"no data found"];
-        // }
+        else{
+            return ['result'=> "no data found"];
+        }
     }
 }
