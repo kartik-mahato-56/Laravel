@@ -367,6 +367,6 @@ class AdminController extends Controller
         
         $communications = CommunicatonDetail::with('admin', 'user')->get();
 
-       return view('admin.communications',['communications'=>$communications]);
+       return view('Admin.communications',['communications'=>$communications]);
     }
 }
