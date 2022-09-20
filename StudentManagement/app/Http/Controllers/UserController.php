@@ -26,10 +26,11 @@ class UserController extends Controller
 
         ]);
 
-        $token = $user->createToken('mytoken')->plainTextToken;
+        // $token = $user->createToken('mytoken')->plainTextToken;
         return response()->json([
+            'status'=>"success",
             'user' => $user,
-            'token' => $token
+            
         ],201);
     }
 
@@ -64,5 +65,27 @@ class UserController extends Controller
                 "result"=> "you haven't registered yet!"
             ],404);
         }
+    }
+
+    public function logged_user(){
+        $user = auth()->user();
+        return response([
+            'status'=>"successs",
+            "user" => $user
+        ],200);
+    }
+
+    public function changePassword(Request $request){
+
+        $request->validate([
+            "password" => "required|confirmed"
+        ]);
+        $logged_user = auth()->user();
+        $logged_user->password = Hash::make($request->password);
+        $logged_user->save();
+        return response([
+            'status'=>'suucess',
+            'message'=> "password changed successfull",
+        ]);
     }
 }

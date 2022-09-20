@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\PasswordResetController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\UserController;
+use App\Models\PasswordReset;
 use App\Models\Student;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -22,6 +24,13 @@ use Illuminate\Support\Facades\Route;
 Route::post('/register', [UserController::class, 'register']);
 // login with authentication:
 Route::post('/login',[UserController::class, 'login']);
+
+// sending password reset link on email
+Route::post('/send_password_reset_mail',[PasswordResetController::class, 'send_password_reset_mail']);
+// route to reset password using token
+Route::post('/reset_password/{token}',[PasswordResetController::class, 'resetPassword']);
+
+
 // Authenticating api's
 Route::middleware('auth:sanctum')->group(function(){
     Route::get('/students', [StudentController::class, 'index']);
@@ -30,7 +39,10 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::put('/update/{id}', [StudentController::class, 'update']);
     Route::get('/delete/{id}', [StudentController::class, 'destroy']);
 
-
+    // logged user details
+    Route::get('/logged_user', [UserController::class, 'logged_user']);
+    // change password
+    Route::post('/change_password', [UserController::class, 'changePassword']);
     // logout route
     Route::post('/logout', [UserController::class, 'logout']);
 
