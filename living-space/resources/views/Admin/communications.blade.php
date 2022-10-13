@@ -1,13 +1,19 @@
-@include('Admin.common.head')
-<title>communications List</title>
-{{-- <link rel="stylesheet" href="{{asset('css/style.css')}}"> --}}
-<link rel="stylesheet" href="//cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
-<script src="//cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
-<script>
-    $(document).ready( function () {
-    $('#example').DataTable();
-} );
-</script>
+<!DOCTYPE html>
+<html>
+    <head>
+        @include('Admin.common.head')
+        <title>communications List</title>
+        <link rel="stylesheet" href="{{asset('css/style.css')}}"> 
+        {{-- <link rel="stylesheet" href="//cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
+        <script src="//cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+        <script>
+            $(document).ready( function () {
+            $('#example').DataTable();
+        } );
+        </script> --}}
+
+    </head>
+
 <body class="animsition">
     <div class="page-wrapper">
         <!-- HEADER MOBILE-->

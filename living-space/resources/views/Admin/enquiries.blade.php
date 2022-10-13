@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html>
-@include('Admin.common.head')
-<title>Enquires List</title>
+
+<head>
+    @include('Admin.common.head')
+    <title>Enquires List</title>
 
 </head>
 
@@ -39,7 +41,7 @@
                                                 <input type="date" name="todate" class="au-input ">
 
                                                 <button type="submit" class="btn btn-outline-primary">
-                                                    <i class="fa fa-search" aria-hidden="true"></i></label>
+                                                    <i class="fa fa-search" aria-hidden="true"></i>
                                                 </button>
 
 
@@ -54,8 +56,8 @@
 
                                         </div>
                                     </div>
+                                </form>
                             </div>
-                            </form>
                         </div>
                         <div>
                             <table class="table table-borderless table-striped table-earning table-data3"
@@ -92,8 +94,9 @@
                                                         class="btn btn-outline-primary btn-sm"><i class="fa fa-reply"
                                                             aria-hidden="true"></i></a>&nbsp;&nbsp;
                                                     <a href="{{ route('delete_enquiry', $enquiry->id) }}" role="button"
-                                                        class="btn btn-outline-danger"><i class="fa fa-trash"
-                                                            aria-hidden="true"></i></a>
+                                                        class="btn btn-outline-danger"
+                                                        onclick="confirm('Are you sure want to delete this enquiry')"><i
+                                                            class="fa fa-trash" aria-hidden="true"></i></a>
                                                 @else
                                                     <a href="{{ route('reply_enquiry_show', $enquiry->id) }}"
                                                         role="button" class="btn btn-outline-success btn-sm"><i
@@ -115,7 +118,8 @@
                 </div>
             </div>
         </div>
-        @include('Admin.common.footer')
+    </div>
+    @include('Admin.common.footer')
 </body>
 
 </html>

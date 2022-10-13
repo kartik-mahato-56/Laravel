@@ -174,9 +174,9 @@
 
                     </div>
                 </div>
-                {{-- <footer class="text-center">
-           <i class="fa fa-copyright" aria-hidden="true"></i>Copyright@2022 all rights reserved
-          </footer> --}}
+                <footer class="text-center">
+                  <i class="fa fa-copyright" aria-hidden="true"></i>Copyright@2022 all rights reserved
+                </footer>
             </div>
             <!-- END MAIN CONTENT-->
             <!-- END PAGE CONTAINER-->

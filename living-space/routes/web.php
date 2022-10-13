@@ -48,6 +48,7 @@ Route::get('/thank-you', function(){
 });
 
 Route::get('/admin',[AdminController::class, 'index'])->name('admin');
+
 Route::post('/dashboard', [AdminController::class, 'login'])->name('login');
 
 Route::get('/register',[AdminController::class, 'register'])->name('register');
@@ -129,7 +130,7 @@ Route::group(['middleware'=>'admin_auth'],function(){
     Route::post('/reply_enquiry',[AdminController::class, 'replyEnquirySubmit'])->name('reply_enquiry_post');
     Route::post('/enquiries',[AdminController::class, 'enquirySearch'])->name('enquiry_search_post');
     Route::get('/reply_enquiry_show/{id}',[AdminController::class, 'reply_enquiry_show'])->name('reply_enquiry_show');
-    Route::post('/delete_enquiry/{id}', [AdminController::class, 'delete_enquiry'])->name('delete_enquiry');
+    Route::get('/delete_enquiry/{id}', [AdminController::class, 'delete_enquiry'])->name('delete_enquiry');
 
 
     // menubar & pages  routes:

@@ -204,6 +204,8 @@ class AdminController extends Controller
     public function forgetPassword_(Request $request)
     {
 
+
+        // $user = Admin::where('id', session('ADMIN_ID'))->first();
         $otp = random_int(111111, 999999);
         $request->session()->put('otp', $otp);
         $content = "<html>";

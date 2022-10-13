@@ -9,7 +9,7 @@ function admindata($id){
 };
 
 function mainPage(){
-    $mainMenu = MainMenu::where('status',1)->get();
+    $mainMenu = MainMenu::where('sub_menu',1)->get();
     
     return $mainMenu;
 }

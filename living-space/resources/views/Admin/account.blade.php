@@ -62,7 +62,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="" class="form-label">Phone</label>
-                            <input type="text" maxlength="10" class="form-control" name="phone" id="" placeholder="enter phone number" value="{{$user->phone}}">
+                            <input type="text" maxlength="10" class="form-control" name="phone" id="" placeholder="ent  er phone number" value="{{$user->phone}}">
                         </div>
 
                         <div class="text-center">
@@ -126,8 +126,6 @@ savebutton.addEventListener('click',function(){
         fileInput.value = "";
         return false;
      }
-
-
     }
 
     addEventListener("load",function(){

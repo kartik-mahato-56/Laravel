@@ -32,15 +32,12 @@
                     <div class="single-widget latest-news">
                         <h2>Our Services</h2>
                         <ul>
-                            {{-- @foreach (mainMenu() as $menu)
-                            @if($menu->sub_menu == 1)
-                                   @foreach (subMenu($menu->slug) as $subMenu)   
-                                        <li><a href="{{route('service-pages', $subMenu->slug)}}">{{$subMenu->name}}</a></li>
-                                   @endforeach
-                            @else
-                                <li class=""><a href="{{route('service-pages', $menu->slug)}}">{{$menu->name}}</a></li>
-                            @endif
-                        @endforeach --}}
+                            @foreach (mainPage() as $menu)
+                                @foreach (subMenu($menu->id) as $subMenu)   
+                                    <li><i class="fas fa-angle-right mr10 color-white"></i><a href="{{route('service-pages', $subMenu->slug)}}">{{$subMenu->name}}</a></li>
+                                @endforeach
+                            
+                            @endforeach
 
                         </ul>
                     </div>

@@ -49,6 +49,9 @@ class Kernel extends HttpKernel
             // 'throttle:api',
             \App\Http\Middleware\AdminMiddleware::class,
         ],
+        'prevent_back' => [
+            \App\Http\Middleware\PreventBackMiddleware::class,
+        ]
     ];
 
     /**
